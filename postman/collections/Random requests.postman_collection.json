@@ -1,0 +1,320 @@
+{
+  "info": {
+    "_postman_id": "453191ca-9e2e-487f-820b-e56da556fb9f",
+    "name": "Random requests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "mod-template-engine",
+      "item": [
+        {
+          "name": "get templates",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "414dd856-56d8-440c-ab8a-af34205018ef",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'client_credentials'},\r",
+                  "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "7fa2f794-ddab-4529-9679-53b2e5386a7f",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "58a16404-e034-49aa-9157-c54c17ac15f7",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/templates",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "templates"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "f8e86e4a-d843-4f78-a819-e7675f3d0271"
+    },
+    {
+      "name": "edge-rtac",
+      "item": [
+        {
+          "name": "get rtac edge",
+          "id": "795834b3-6bd7-4bad-935f-f99a4a5562f6",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://edge-{{tenant_prefix}}.{{domain}}/rtac?apiKey={{edge_key}}",
+              "protocol": "https",
+              "host": [
+                "edge-{{tenant_prefix}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "rtac"
+              ],
+              "query": [
+                {
+                  "key": "apiKey",
+                  "value": "{{edge_key}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "136a797a-e50b-4946-b120-0a3bf0a3dca7"
+    },
+    {
+      "name": "edge-patron",
+      "item": [
+        {
+          "name": "get patron account",
+          "id": "a6db1999-9e9a-4396-9c60-88bb30e61edd",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://edge-{{tenant_prefix}}.{{domain}}/patron/account?apiKey={{edge_key}}",
+              "protocol": "https",
+              "host": [
+                "edge-{{tenant_prefix}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "patron",
+                "account"
+              ],
+              "query": [
+                {
+                  "key": "apiKey",
+                  "value": "{{edge_key}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "8df16648-9da9-4b45-82ac-29fdee323641"
+    },
+    {
+      "name": "keycloak",
+      "item": [
+        {
+          "name": "configure KC realm",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "40f6b2d1-5a6b-45b0-adf6-aa6d8ee78067",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'password'},\r",
+                  "            {key: 'client_id', value: 'admin-cli'},\r",
+                  "            {key: 'password', value: pm.environment.get('keycloak_password')},\r",
+                  "            {key: 'username', value: 'admin'}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "e64f99ef-acb8-4a26-aa18-39e1b91afea5",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{okapi-token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {ADMIN_ACCESS_TOKEN}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"resetPasswordAllowed\": true\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://keycloak-{{folio}}.{{domain}}/admin/realms/{{realm}}",
+              "protocol": "https",
+              "host": [
+                "keycloak-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{realm}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "3a10e900-b1ce-403a-8886-74432109fc47"
+    },
+    {
+      "name": "edge-ea-test",
+      "id": "e44e3a66-9283-488b-8903-97532e614036",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://edge-relctls2-central-tenant.int.aws.folio.org/ea-data-export/users?apiKey=eyJzIjoiRFNVNjZzMDFReSIsInQiOiJjczAwMDAwaW50IiwidSI6IkVCU0NPRWRnZSJ9",
+          "protocol": "https",
+          "host": [
+            "edge-relctls2-central-tenant",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "ea-data-export",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "apiKey",
+              "value": "eyJzIjoiRFNVNjZzMDFReSIsInQiOiJjczAwMDAwaW50IiwidSI6IkVCU0NPRWRnZSJ9"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "id": "35567535-aca0-40b2-822b-45af127ff35d",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "https://edge-tls-bugfest-sunflower.int.aws.folio.org/dcbService/dcb/shadow-locations/refresh?apiKey=eyJzIjoiUGNLTVdVc2V5ViIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9%27 \\\n--header Content-Type:",
+      "id": "0a09019f-295e-4876-8b12-0b763ba6de83",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://edge-tls-bugfest-sunflower.int.aws.folio.org/dcbService/dcb/shadow-locations/refresh?apiKey=eyJzIjoiUGNLTVdVc2V5ViIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9%27 \\\n--header Content-Type:",
+          "protocol": "https",
+          "host": [
+            "edge-tls-bugfest-sunflower",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "dcbService",
+            "dcb",
+            "shadow-locations",
+            "refresh"
+          ],
+          "query": [
+            {
+              "key": "apiKey",
+              "value": "eyJzIjoiUGNLTVdVc2V5ViIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9%27 \\\n--header Content-Type:"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl --location 'https://edge-tls-bugfest-sunflower.int.aws.folio.org/dcbService/dcb/shadow-locations/refresh?apiKey=eyJzIjoiUGNLTVdVc2V5ViIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9%27 \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"agencies\": [\n        {\n            \"name\": \"agen 1\",\n            \"code\": \"agen1\"\n        },\n        {\n            \"name\": \"agen 2\",\n            \"code\": \"agen2\"\n        }\n    ],\n    \"locations\": [\n        {\n            \"name\": \"shad-loc1-name\",\n            \"code\": \"shad-loc1-code\",\n            \"agency\": {\n                \"name\": \"agen 1\",\n                \"code\": \"agen1\"\n            }\n        },\n        {\n            \"name\": \"shad-loc2-name\",\n            \"code\": \"shad-loc2-code\",\n            \"agency\": {\n                \"name\": \"agen 2\",\n                \"code\": \"agen2\"\n            }\n        }\n    ]\n}'"
+      },
+      "response": []
+    }
+  ]
+}

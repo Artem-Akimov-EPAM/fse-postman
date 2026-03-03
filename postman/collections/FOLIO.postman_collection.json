@@ -1,0 +1,2079 @@
+{
+  "info": {
+    "_postman_id": "308bef43-98d4-4050-ae2d-40ad0c62293c",
+    "name": "FOLIO",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "_/proxy/tenants INT",
+      "id": "c1b923a8-a650-43c6-b63a-f8aa2579cc41",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "enabled modules",
+      "id": "3812c352-d151-4c46-ae9a-a25e4f0eb1de",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants/cs00000int/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "cs00000int",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login-with-expiry",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "50db38fb-360f-4427-8b7f-86a05ecc6d7a",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "a3955685-8bc7-49bd-aff6-60da13f274f1",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"POBb2OVhoGKChAahmcaCnknl\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/authn/login-with-expiry",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "authn",
+            "login-with-expiry"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "username =testuser11",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "100",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check enable status",
+      "id": "d80c1f33-c2fc-4b8f-95c5-17ea63237c6e",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "\teyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfaWQiOiIyNzUxMGZiMC05OGRkLTRhYjUtYjY4Mi0yMGY3OGU5ZTY2NWMiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0NDY0NTI2LCJpYXQiOjE3NDQ0NjM5MjYsInRlbmFudCI6InN1cGVydGVuYW50In0.zI-EP2bLPzWdTAP8S2HVJ18DoQXYJafJYtQEy9OB3C4",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/_/proxy/tenants/fs00001257/install?async=false&ignoreErrors=false&tenantParameters=loadReference%3Dfalse%2CloadSample%3Dfalse",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001257",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "false"
+            },
+            {
+              "key": "tenantParameters",
+              "value": "loadReference%3Dfalse%2CloadSample%3Dfalse"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ENABLE",
+      "id": "094a42de-e46b-4ba6-9e62-39be20e12c12",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants/cs00000int/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "cs00000int",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "modules",
+      "id": "4e6982c7-e621-43f0-9f6a-190b53b4f8b9",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfaWQiOiIyNzUxMGZiMC05OGRkLTRhYjUtYjY4Mi0yMGY3OGU5ZTY2NWMiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0NDY0NTI2LCJpYXQiOjE3NDQ0NjM5MjYsInRlbmFudCI6InN1cGVydGVuYW50In0.zI-EP2bLPzWdTAP8S2HVJ18DoQXYJafJYtQEy9OB3C4",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/_/proxy/tenants/fs00001257/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001257",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login-with-expiry Copy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "50db38fb-360f-4427-8b7f-86a05ecc6d7a",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "074a5613-3b8c-461f-a748-f08f4466cd0e",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"POBb2OVhoGKChAahmcaCnknl\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/authn/login-with-expiry",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "authn",
+            "login-with-expiry"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "username =testuser11",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "100",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check enable status Copy",
+      "id": "c3911e1a-370d-4b88-bb9f-29ea8c19e1d1",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "\teyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfaWQiOiIyNzUxMGZiMC05OGRkLTRhYjUtYjY4Mi0yMGY3OGU5ZTY2NWMiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0NDY0NTI2LCJpYXQiOjE3NDQ0NjM5MjYsInRlbmFudCI6InN1cGVydGVuYW50In0.zI-EP2bLPzWdTAP8S2HVJ18DoQXYJafJYtQEy9OB3C4",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/_/proxy/tenants/fs00001257/install?async=false&ignoreErrors=false&tenantParameters=loadReference%3Dfalse%2CloadSample%3Dfalse",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001257",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "false"
+            },
+            {
+              "key": "tenantParameters",
+              "value": "loadReference%3Dfalse%2CloadSample%3Dfalse"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ENABLE Copy",
+      "id": "90aee486-bcf9-44c8-8f43-05bbb6716357",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants/cs00000int/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "cs00000int",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "modules Copy",
+      "id": "94af83cb-ad96-43dd-bd14-67945fbfdcd4",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfaWQiOiIyNzUxMGZiMC05OGRkLTRhYjUtYjY4Mi0yMGY3OGU5ZTY2NWMiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0NDY0NTI2LCJpYXQiOjE3NDQ0NjM5MjYsInRlbmFudCI6InN1cGVydGVuYW50In0.zI-EP2bLPzWdTAP8S2HVJ18DoQXYJafJYtQEy9OB3C4",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/_/proxy/tenants/fs00001257/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001257",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "_/proxy/tenants PRD",
+      "id": "5d9564f6-3022-4aa3-8973-9b50b431ffbf",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "_/proxy/tenants/{{tenantID}}/modules",
+      "id": "de6e2ed5-18a3-417c-9fca-08a54dc05738",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/fs00001200/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001200",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "okapi_version",
+      "id": "8bbdf042-172b-40dd-ad2a-b0bff80ecec8",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{tenant_url}}/_/version",
+          "protocol": "https",
+          "host": [
+            "okapi-{{tenant_url}}"
+          ],
+          "path": [
+            "_",
+            "version"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "edge API",
+      "id": "1df16dc7-2746-4c69-bae8-3dc4071bb9f2",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://edge-{{tenant_url}}/patron/account/{{externalsystemID}}?apikey={{edge_api_key}}&includeLoans=true&includeCharges=true&includeHolds=true",
+          "protocol": "https",
+          "host": [
+            "edge-{{tenant_url}}"
+          ],
+          "path": [
+            "patron",
+            "account",
+            "{{externalsystemID}}"
+          ],
+          "query": [
+            {
+              "key": "apikey",
+              "value": "{{edge_api_key}}"
+            },
+            {
+              "key": "includeLoans",
+              "value": "true"
+            },
+            {
+              "key": "includeCharges",
+              "value": "true"
+            },
+            {
+              "key": "includeHolds",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "_/discovery/modules",
+      "id": "05eb3567-f912-421d-b638-fdc55534732a",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{tenant_url}}/_/discovery/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-{{tenant_url}}"
+          ],
+          "path": [
+            "_",
+            "discovery",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "_/discovery/modules Copy",
+      "id": "55825b85-250c-4278-baa8-a59f694125c5",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/discovery/modules/mod-permissions-5.11.4/mod-permissions-5.11.4",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "discovery",
+            "modules",
+            "mod-permissions-5.11.4",
+            "mod-permissions-5.11.4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "_/discovery/modules INT",
+      "id": "a5479530-9001-42e8-97b4-17a743014d9f",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/discovery/modules/mod-permissions-5.11.4/mod-permissions-5.11.4",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "discovery",
+            "modules",
+            "mod-permissions-5.11.4",
+            "mod-permissions-5.11.4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "_/discovery/modules Copy 2",
+      "id": "edd01802-3552-42f4-b0c3-7bec909007dc",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/discovery/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "discovery",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "_/discovery/modules INT",
+      "id": "0e8b086f-f2ce-4841-aaa8-7b16676db516",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/discovery/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "discovery",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "disable modules Copy",
+      "id": "5a5d83fd-1bac-447d-ad01-144b9bed6851",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    {\n        \"id\": \"mod-data-import-converter-storage-1.15.2\",\n        \"action\": \"disable\"\n}\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/{{tenantID}}/install",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "{{tenantID}}",
+            "install"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "disable modules Copy 2",
+      "id": "27537c90-f412-479d-8ae9-87c799e53025",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    // {\n    // \"id\": \"mod-data-export-worker-1.0.5\",\n    // \"action\": \"disable\"\n    // },\n    {\n    \"id\": \"mod-erm-usage-harvester-2.0.2\",\n    \"action\": \"disable\"\n    },\n    {\n    \"id\": \"mod-erm-usage-3.0.2\",\n    \"action\": \"disable\"\n    }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/{{tenantID}}/install",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "{{tenantID}}",
+            "install"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "enable module INT",
+      "id": "f1f0fc1c-ffad-4eba-bc6b-70db36f8fd40",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[ {\n  \"id\" : \"edge-caiasoft-2.2.2\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-connexion-1.3.0\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-courses-1.4.1\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-dcb-1.1.0-SNAPSHOT.15\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-dematic-2.2.2\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-fqm-2.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-ncip-1.10.0\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-oai-pmh-2.9.1\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-orders-3.0.2\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-patron-5.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-rtac-2.7.2\", \"action\": \"enable\"}, {\n  \"id\" : \"edge-sip2-3.2.4\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_acquisition-units-5.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_agreements-11.0.2\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_bulk-edit-4.1.4\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_calendar-11.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_checkin-9.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_checkout-10.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_circulation-9.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_circulation-log-4.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_courses-6.0.3\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_dashboard-6.0.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_data-export-6.1.4\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_data-import-7.1.8\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_developer-8.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_eholdings-9.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_erm-usage-8.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_export-manager-3.1.2\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_finance-6.0.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_gobi-settings-3.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_handler-stripes-registry-2.2.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_inventory-11.0.4\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_invoice-6.0.3\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_licenses-11.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_lists-3.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_local-kb-admin-8.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_marc-authorities-5.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_myprofile-9.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_notes-9.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_oai-pmh-5.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_orders-6.0.4\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_organizations-5.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-bursar-export-4.0.2\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-create-inventory-records-4.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-agreement-11.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-authority-4.0.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-contact-5.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-eresource-7.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-erm-usage-data-provider-6.0.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-fund-3.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-import-profile-7.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-instance-7.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-interface-5.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-license-11.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-organization-5.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-package-title-6.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-po-line-5.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-find-user-7.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_plugin-query-builder-1.1.5\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_quick-marc-8.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_receiving-5.0.4\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_remote-storage-5.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_requests-9.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_service-interaction-3.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_servicepoints-7.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_stripes-authority-components-4.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_stripes-core-10.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_stripes-smart-components-9.1.3\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_tags-8.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_tenant-settings-8.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"folio_users-10.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-agreements-7.0.5\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-audit-2.9.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-authtoken-2.15.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-batch-print-1.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-bulk-operations-2.0.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-calendar-3.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-circulation-24.2.5\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-circulation-item-1.0.0-SNAPSHOT.12\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-circulation-storage-17.2.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-configuration-5.10.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-consortia-1.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-copycat-1.6.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-courses-1.4.10\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-data-export-5.0.4\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-data-export-spring-3.2.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-data-export-worker-3.2.4\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-data-import-3.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-dcb-1.1.0-SNAPSHOT.17\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-di-converter-storage-2.2.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-ebsconet-2.2.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-email-1.17.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-entities-links-3.0.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-erm-usage-4.6.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-erm-usage-harvester-4.4.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-event-config-2.7.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-feesfines-19.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-finance-4.9.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-finance-storage-8.6.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-fqm-manager-2.0.4\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-gobi-2.8.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-graphql-1.12.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-inventory-20.2.6\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-inventory-storage-27.1.3\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-inventory-update-3.3.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-invoice-5.8.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-invoice-storage-5.8.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-kb-ebsco-java-4.0.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-licenses-6.0.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-lists-2.0.6\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-login-7.11.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-login-saml-2.8.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-ncip-1.14.5\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-notes-5.2.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-notify-3.2.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-oai-pmh-3.13.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-orders-12.8.8\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-orders-storage-13.7.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-organizations-1.9.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-organizations-storage-4.7.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-password-validator-3.2.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-patron-6.1.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-patron-blocks-1.10.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-permissions-6.5.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-pubsub-2.13.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-quick-marc-5.1.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-remote-storage-3.2.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-rtac-3.6.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-search-3.2.6\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-sender-1.12.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-service-interaction-4.0.2\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-settings-1.0.3\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-source-record-manager-3.8.5\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-source-record-storage-5.8.5\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-tags-2.2.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-template-engine-1.20.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-user-import-3.8.0\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-users-19.3.1\", \"action\": \"enable\"}, {\n  \"id\" : \"mod-users-bl-7.7.3\", \"action\": \"enable\"}, {\n  \"id\" : \"okapi-5.3.0\", \"action\": \"enable\"} ]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-qcpt-us-east-1.int.aws.folio.org/_/proxy/tenants/cs00000001_0011/install",
+          "protocol": "https",
+          "host": [
+            "okapi-qcpt-us-east-1",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "cs00000001_0011",
+            "install"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "fc93c468-f2af-433e-8351-a22e20222734",
+            "exec": [
+              "let token = postman.getResponseHeader(\"x-okapi-token\");",
+              "pm.environment.set(\"xokapitoken\", token);",
+              " ",
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "5ebaef43-6be4-4074-b353-4f38a4b86a1b",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{tenant_id}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\":\"{{ebsco_admin_name}}\",\n    \"password\":\"{{ebsco_admin_password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authn/login-with-expiry",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authn",
+            "login-with-expiry"
+          ],
+          "query": [
+            {
+              "key": "username",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "enable module - nolana full",
+      "id": "3e315f70-8419-4203-806b-4287daca6e64",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  {\n    \"id\": \"folio_developer-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_handler-stripes-registry-1.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_myprofile-7.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-authority-1.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-fund-1.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-package-title-4.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-user-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_servicepoints-6.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-graphql-1.10.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-licenses-4.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_licenses-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-license-8.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-event-config-2.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-users-19.1.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-storage-5.5.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-password-validator-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-tags-1.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_tags-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-finance-storage-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-organizations-storage-4.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-contact-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-interface-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-orders-storage-13.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-storage-5.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-permissions-6.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-login-7.8.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-pubsub-2.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-organizations-1.6.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-converter-storage-1.15.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-service-interaction-2.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_dashboard-3.0.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-storage-25.0.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-update-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-storage-15.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-patron-blocks-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-rtac-3.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-rtac-2.6.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-user-import-3.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-manager-3.5.6\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-19.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-agreements-5.4.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-agreement-8.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-eresource-4.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-worker-2.0.7\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-quick-marc-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_quick-marc-5.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-authtoken-2.12.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-calendar-2.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_calendar-8.0.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-configuration-5.9.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_agreements-8.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-organization-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-template-engine-1.18.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-email-1.15.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-users-bl-7.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-core-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_users-8.2.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-sender-1.9.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-notify-2.12.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-feesfines-18.1.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-notes-4.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_notes-7.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-smart-components-7.3.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-login-saml-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_tenant-settings-7.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-audit-2.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_circulation-log-2.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-oai-pmh-3.10.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_oai-pmh-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-oai-pmh-2.5.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-finance-4.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-23.3.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_checkin-7.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_checkout-8.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_circulation-7.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-create-inventory-records-3.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_requests-7.2.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-patron-5.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-patron-4.10.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-ncip-1.12.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-ncip-1.8.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-remote-storage-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_remote-storage-3.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-dematic-1.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-caiasoft-1.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-orders-12.5.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_acquisition-units-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-po-line-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-spring-1.5.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_bulk-edit-2.1.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_export-manager-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_organizations-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-bursar-export-2.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-5.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_finance-3.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_invoice-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-gobi-2.5.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_gobi-settings-1.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-ebsconet-1.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-orders-2.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-copycat-1.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-connexion-1.0.5\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-search-1.8.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_marc-authorities-2.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_orders-3.3.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-instance-6.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_receiving-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-authority-components-1.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-sip2-2.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-4.6.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_data-export-5.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_inventory-9.2.8\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-courses-1.4.6\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_courses-5.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-kb-ebsco-java-3.12.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_eholdings-7.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-2.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_data-import-5.3.10\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-import-profile-5.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-task-list-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_task-list-4.1.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-ea-data-export-3.7.0\",\n    \"action\": \"enable\"\n  }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/fs00001132/install",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001132",
+            "install"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get install status",
+      "id": "782497dd-0646-4aa3-828a-87523b5129dc",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  {\n    \"id\": \"folio_developer-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_handler-stripes-registry-1.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_myprofile-7.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-authority-1.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-fund-1.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-package-title-4.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-user-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_servicepoints-6.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-graphql-1.10.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-licenses-4.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_licenses-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-license-8.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-event-config-2.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-users-19.1.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-storage-5.5.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-password-validator-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-tags-1.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_tags-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-finance-storage-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-organizations-storage-4.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-contact-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-interface-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-orders-storage-13.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-storage-5.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-permissions-6.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-login-7.8.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-pubsub-2.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-organizations-1.6.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-converter-storage-1.15.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-service-interaction-2.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_dashboard-3.0.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-storage-25.0.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-update-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-storage-15.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-patron-blocks-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-rtac-3.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-rtac-2.6.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-user-import-3.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-manager-3.5.6\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-19.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-agreements-5.4.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-agreement-8.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-eresource-4.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-worker-2.0.7\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-quick-marc-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_quick-marc-5.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-authtoken-2.12.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-calendar-2.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_calendar-8.0.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-configuration-5.9.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_agreements-8.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-organization-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-template-engine-1.18.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-email-1.15.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-users-bl-7.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-core-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_users-8.2.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-sender-1.9.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-notify-2.12.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-feesfines-18.1.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-notes-4.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_notes-7.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-smart-components-7.3.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-login-saml-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_tenant-settings-7.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-audit-2.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_circulation-log-2.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-oai-pmh-3.10.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_oai-pmh-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-oai-pmh-2.5.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-finance-4.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-23.3.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_checkin-7.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_checkout-8.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_circulation-7.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-create-inventory-records-3.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_requests-7.2.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-patron-5.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-patron-4.10.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-ncip-1.12.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-ncip-1.8.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-remote-storage-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_remote-storage-3.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-dematic-1.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-caiasoft-1.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-orders-12.5.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_acquisition-units-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-po-line-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-spring-1.5.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_bulk-edit-2.1.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_export-manager-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_organizations-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-bursar-export-2.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-5.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_finance-3.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_invoice-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-gobi-2.5.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_gobi-settings-1.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-ebsconet-1.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-orders-2.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-copycat-1.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-connexion-1.0.5\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-search-1.8.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_marc-authorities-2.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_orders-3.3.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-instance-6.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_receiving-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-authority-components-1.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-sip2-2.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-4.6.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_data-export-5.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_inventory-9.2.8\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-courses-1.4.6\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_courses-5.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-kb-ebsco-java-3.12.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_eholdings-7.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-2.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_data-import-5.3.10\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-import-profile-5.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-task-list-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_task-list-4.1.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-ea-data-export-3.7.0\",\n    \"action\": \"enable\"\n  }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/fs00001183/install",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001183",
+            "install"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get install status-INT",
+      "id": "a645d6b1-386d-4ff6-9f06-e42f3390d7c5",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  {\n    \"id\": \"folio_developer-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_handler-stripes-registry-1.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_myprofile-7.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-authority-1.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-fund-1.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-package-title-4.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-user-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_servicepoints-6.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-graphql-1.10.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-licenses-4.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_licenses-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-license-8.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-event-config-2.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-users-19.1.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-storage-5.5.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-password-validator-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-tags-1.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_tags-6.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-finance-storage-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-organizations-storage-4.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-contact-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-interface-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-orders-storage-13.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-storage-5.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-permissions-6.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-login-7.8.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-pubsub-2.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-organizations-1.6.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-converter-storage-1.15.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-service-interaction-2.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_dashboard-3.0.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-storage-25.0.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-update-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-storage-15.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-patron-blocks-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-rtac-3.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-rtac-2.6.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-user-import-3.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-manager-3.5.6\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-19.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-agreements-5.4.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-agreement-8.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-eresource-4.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-worker-2.0.7\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-quick-marc-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_quick-marc-5.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-authtoken-2.12.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-calendar-2.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_calendar-8.0.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-configuration-5.9.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_agreements-8.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-organization-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-template-engine-1.18.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-email-1.15.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-users-bl-7.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-core-8.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_users-8.2.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-sender-1.9.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-notify-2.12.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-feesfines-18.1.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-notes-4.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_notes-7.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-smart-components-7.3.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-login-saml-2.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_tenant-settings-7.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-audit-2.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_circulation-log-2.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-oai-pmh-3.10.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_oai-pmh-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-oai-pmh-2.5.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-finance-4.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-23.3.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_checkin-7.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_checkout-8.2.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_circulation-7.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-create-inventory-records-3.2.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_requests-7.2.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-patron-5.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-patron-4.10.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-ncip-1.12.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-ncip-1.8.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-remote-storage-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_remote-storage-3.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-dematic-1.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-caiasoft-1.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-orders-12.5.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_acquisition-units-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-po-line-3.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-spring-1.5.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_bulk-edit-2.1.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_export-manager-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_organizations-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-bursar-export-2.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-5.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_finance-3.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_invoice-3.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-gobi-2.5.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_gobi-settings-1.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-ebsconet-1.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-orders-2.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-copycat-1.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-connexion-1.0.5\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-search-1.8.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_marc-authorities-2.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_orders-3.3.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-instance-6.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_receiving-2.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_stripes-authority-components-1.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-sip2-2.4.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-4.6.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_data-export-5.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_inventory-9.2.8\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-courses-1.4.6\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_courses-5.3.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-kb-ebsco-java-3.12.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_eholdings-7.3.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-2.6.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_data-import-5.3.10\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_plugin-find-import-profile-5.3.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-task-list-1.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"folio_task-list-4.1.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"edge-ea-data-export-3.7.0\",\n    \"action\": \"enable\"\n  }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants/fs00001183/install",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001183",
+            "install"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "enable module - specific modules",
+      "id": "197ec875-b3ed-466c-b6b6-695cb66f1bf5",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  {\n    \"id\": \"folio_oa-2.0.0\",\n    \"action\": \"enable\"\n  }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/fs00001034/install",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001034",
+            "install"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "enable module integration-nolana",
+      "id": "ccc5636c-1af4-4026-9a1b-786c272c60a5",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    {\n        \"id\": \"folio_developer-6.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_handler-stripes-registry-1.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_myprofile-7.2.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-authority-1.0.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-fund-1.2.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-package-title-4.2.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-user-6.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_servicepoints-6.2.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-graphql-1.10.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-licenses-4.2.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_licenses-8.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-license-8.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-event-config-2.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-users-19.0.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-source-record-storage-5.5.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-password-validator-2.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-tags-1.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_tags-6.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-finance-storage-8.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-organizations-storage-4.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-contact-3.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-interface-3.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-orders-storage-13.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-invoice-storage-5.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-permissions-6.2.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-login-7.8.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-pubsub-2.7.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-organizations-1.6.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-import-converter-storage-1.15.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-service-interaction-2.0.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_dashboard-3.0.4\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-inventory-storage-25.0.3\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-inventory-update-2.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-circulation-storage-15.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-patron-blocks-1.7.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-rtac-3.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-rtac-2.6.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-user-import-3.7.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-source-record-manager-3.5.6\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-inventory-19.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-agreements-5.4.4\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_local-kb-admin-5.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-agreement-8.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-eresource-4.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-export-worker-2.0.7\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-quick-marc-2.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_quick-marc-5.2.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-authtoken-2.12.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-calendar-2.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_calendar-8.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-configuration-5.9.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_agreements-8.3.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-organization-3.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-template-engine-1.18.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-email-1.15.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-users-bl-7.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_stripes-core-8.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_users-8.2.4\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-sender-1.9.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-notify-2.12.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-feesfines-18.1.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-notes-4.0.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_notes-7.0.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_stripes-smart-components-7.3.3\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-login-saml-2.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_tenant-settings-7.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-audit-2.6.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_circulation-log-2.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-oai-pmh-3.10.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_oai-pmh-3.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-oai-pmh-2.5.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-finance-4.6.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-circulation-23.3.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_checkin-7.2.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_checkout-8.2.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_circulation-7.2.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-create-inventory-records-3.2.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_requests-7.2.4\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-patron-5.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-patron-4.10.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-ncip-1.12.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-ncip-1.8.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-remote-storage-1.7.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_remote-storage-3.3.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-dematic-1.7.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-caiasoft-1.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-orders-12.5.4\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_acquisition-units-3.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-po-line-3.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-export-spring-1.5.3\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_bulk-edit-2.1.3\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_export-manager-2.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_organizations-3.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-bursar-export-2.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-invoice-5.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_finance-3.3.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_invoice-3.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-gobi-2.5.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_gobi-settings-1.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-ebsconet-1.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-orders-2.7.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-copycat-1.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-connexion-1.0.5\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-search-1.8.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_marc-authorities-2.0.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_orders-3.3.3\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-instance-6.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_receiving-2.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_stripes-authority-components-1.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-sip2-2.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-export-4.6.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_data-export-5.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_inventory-9.2.8\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-courses-1.4.6\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_courses-5.3.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-kb-ebsco-java-3.12.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_eholdings-7.3.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-import-2.6.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_data-import-5.3.10\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_plugin-find-import-profile-5.3.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-task-list-1.7.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"folio_task-list-4.1.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-ea-data-export-3.6.0\",\n        \"action\": \"enable\"\n    }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants/fs09002000/install?async=false&ignoreErrors=true",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs09002000",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "re-enable specific module integration",
+      "id": "54679af8-5e8f-40fc-b48b-bf96f5066718",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    {\n        \"id\": \"mod-permissions:6.4.0-SNAPSHOT.356\",\n        \"action\": \"enable\"\n    }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants/fs00001047/install?async=false&ignoreErrors=true&reinstall=true&tenantParameters=loadReference%3Dtrue%2CloadSample%3Dtrue",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001047",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "true"
+            },
+            {
+              "key": "reinstall",
+              "value": "true"
+            },
+            {
+              "key": "tenantParameters",
+              "value": "loadReference%3Dtrue%2CloadSample%3Dtrue"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "reinstall modules",
+      "id": "a3cfdde5-7d8f-4432-9192-599eae080cce",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[{\n    \"id\": \"mod-orders-storage-13.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-5.6.5\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-spring-2.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-quick-marc-3.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-20.0.5\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-search-2.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-2.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-remote-storage-2.0.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-pubsub-2.9.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-worker-3.0.12\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-manager-3.6.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-storage-26.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-storage-5.6.7\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-storage-16.0.1\",\n    \"action\": \"enable\"\n  }]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/fs00001047/install?async=false&ignoreErrors=true&reinstall=true",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001047",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "true"
+            },
+            {
+              "key": "reinstall",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "reinstall modules-orchid-csp4",
+      "id": "3bf16adf-c82f-4804-9400-874b61ed2084",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[{\n    \"id\": \"mod-orders-storage-13.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-5.6.5\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-spring-2.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-quick-marc-3.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-20.0.6\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-search-2.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-2.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-remote-storage-2.0.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-pubsub-2.9.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-worker-3.0.13\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-manager-3.6.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-storage-26.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-storage-5.6.7\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-storage-16.0.1\",\n    \"action\": \"enable\"\n  }]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/fs00001047/install?async=false&ignoreErrors=true&reinstall=true",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001047",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "true"
+            },
+            {
+              "key": "reinstall",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "reinstall modules-orchid-SP-5.4",
+      "id": "1555d258-b1fd-4970-ae01-b6a9d66bbf5f",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[{\n    \"id\": \"mod-orders-storage-13.5.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-invoice-5.6.5\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-spring-2.0.2\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-quick-marc-3.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-20.0.7\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-search-2.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-2.7.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-remote-storage-2.0.3\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-pubsub-2.9.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-worker-3.0.13\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-manager-3.6.4\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-storage-26.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-storage-5.6.11\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-storage-16.0.1\",\n    \"action\": \"enable\"\n  }]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/fs00001041/install?async=false&ignoreErrors=true&reinstall=true",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001041",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "true"
+            },
+            {
+              "key": "reinstall",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "reinstall modules-poppy",
+      "id": "7951b890-6193-4e9c-b5f1-146d6385fb43",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[{\n  \"id\": \"mod-orders-storage-13.6.0\",\n  \"action\": \"enable\"\n},\n{\n  \"id\": \"mod-invoice-5.7.0\",\n  \"action\": \"enable\"\n},\n{\n  \"id\": \"mod-data-export-spring-3.0.0\",\n  \"action\": \"enable\"\n},\n  {\n    \"id\": \"mod-quick-marc-5.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-20.1.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-search-3.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-import-3.0.1\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-remote-storage-3.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-pubsub-2.11.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-data-export-worker-3.1.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-manager-3.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-inventory-storage-27.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-source-record-storage-5.7.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-circulation-storage-17.1.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-bulk-operations-1.1.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-consortia-1.0.0\",\n    \"action\": \"enable\"\n  },\n  {\n    \"id\": \"mod-users-19.2.0\",\n    \"action\": \"enable\"\n  }\n\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.folio.ebsco.com/_/proxy/tenants/fs00001041/install?async=false&ignoreErrors=true&reinstall=true",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001041",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "true"
+            },
+            {
+              "key": "reinstall",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "reinstall modules-poppy-int",
+      "id": "f1652b29-e047-42b0-81cc-27d761fb1fce",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Okapi-Tenant",
+            "value": "{{supertenant-x-okapi-tenant}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Okapi-Token",
+            "value": "{{supertenant-x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    {\n        \"id\": \"edge-caiasoft-2.1.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-connexion-1.1.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-dematic-2.1.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-ea-data-export-4.0.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-fqm-1.0.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-ncip-1.9.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-oai-pmh-2.7.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-orders-2.9.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-patron-5.0.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-rtac-2.6.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"edge-sip2-3.1.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-agreements-6.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-audit-2.8.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-authtoken-2.14.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-bulk-operations-1.1.9\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-calendar-2.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-circulation-24.0.11\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-circulation-storage-17.1.7\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-configuration-5.9.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-copycat-1.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-courses-1.4.8\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-export-4.8.7\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-export-spring-3.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-export-worker-3.1.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-data-import-3.0.7\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-di-converter-storage-2.1.5\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-ebsconet-2.1.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-email-1.16.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-entities-links-2.0.4\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-event-config-2.6.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-feesfines-19.0.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-finance-4.8.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-finance-storage-8.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-fqm-manager-1.0.3\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-gobi-2.7.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-graphql-1.12.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-inventory-20.1.6\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-inventory-storage-27.0.4\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-inventory-update-3.2.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-invoice-5.7.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-invoice-storage-5.7.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-kb-ebsco-java-4.0.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-licenses-5.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-lists-1.0.5\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-login-7.10.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-login-saml-2.7.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-ncip-1.14.4\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-notes-5.1.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-notify-3.1.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-oai-pmh-3.12.8\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-orders-12.7.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-orders-storage-13.6.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-organizations-1.8.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-organizations-storage-4.6.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-password-validator-3.1.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-patron-6.0.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-patron-blocks-1.9.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-permissions-6.4.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-pubsub-2.11.3\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-quick-marc-5.0.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-remote-storage-3.0.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-rtac-3.5.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-search-3.0.5\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-sender-1.11.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-service-interaction-3.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-settings-1.0.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-source-record-manager-3.7.7\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-source-record-storage-5.7.5\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-tags-2.1.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-task-list-1.9.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-template-engine-1.19.1\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-user-import-3.8.0\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-users-19.2.2\",\n        \"action\": \"enable\"\n    },\n    {\n        \"id\": \"mod-users-bl-7.6.0\",\n        \"action\": \"enable\"\n    }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants/fs00001041/install?async=false&ignoreErrors=true&reinstall=true&tenantParameters=loadReference%3Dtrue%2CloadSample%3Dtrue",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001041",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "true"
+            },
+            {
+              "key": "reinstall",
+              "value": "true"
+            },
+            {
+              "key": "centralTenantId",
+              "value": "cs00000int",
+              "disabled": true
+            },
+            {
+              "key": "tenantParameters",
+              "value": "loadReference%3Dtrue%2CloadSample%3Dtrue"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "configurations/entries",
+      "id": "d23d8aa5-bc13-4519-9caf-75aaffe94b84",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{tenant_url}}/configurations/entries",
+          "protocol": "https",
+          "host": [
+            "okapi-{{tenant_url}}"
+          ],
+          "path": [
+            "configurations",
+            "entries"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647",
+      "id": "019a9f9c-c476-4703-b869-85d8fd81ffbd",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-GB,en-US;q=0.9,en;q=0.8,uk;q=0.7"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json"
+          },
+          {
+            "key": "cookie",
+            "value": "apt.uid=AP-YFGMCGUNNIFB-2-1729156257814-55227829.0.2.6b933aba-006b-4c12-b4b5-a0ddc2adfcf4; _ga=GA1.1.1214768550.1729156258; _ga_0C4M1PWYZ7=GS1.1.1729673316.3.0.1729673316.0.0.0; _ga_T11SF3WXX2=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_K2SPJK2C73=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_KP5SFCXJL1=GS1.1.1733222857.10.1.1733223452.0.0.0; folioAccessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKbDJ5anNaTm9TQTJRM1RWbDJCbkkyNHBXM1V5YndIYl9WRDVhU19PUnNNIn0.eyJleHAiOjE3MzM5ODc1NzMsImlhdCI6MTczMzk4NzEzNywiYXV0aF90aW1lIjoxNzMzOTgzOTczLCJqdGkiOiIyNGU1NmZiMS05ZTQ0LTQ0Y2QtOTZlZC1lNDk5NGZkYzhlMTYiLCJpc3MiOiJodHRwczovL2tleWNsb2FrLXJlYmYuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL2NzMDAwMDBpbnQiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZWNzX2FkbWluIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY3MwMDAwMGludC1hcHBsaWNhdGlvbiIsInNpZCI6ImE2OGY0MWU1LTk1Y2MtNDEwOC04ZmE5LTcyNzYwNjAxYzExMCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlF1aWNrIE1BUkMgQWxsIiwiNjU4ZGJmYmUxNzYyNzMxNmM3MDA5NTM4ZDczMzNlZWI3OTE3OTNhMCIsIm9mZmxpbmVfYWNjZXNzIiwiRUJTQ09BZG1pblJvbGUiLCJkZWZhdWx0LXJvbGVzLWNzMDAwMDBpbnQiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJkYTM5ZjVhOC1kYWMwLTRlNmUtODczMS04NjVjMTMzYWQxODciLCJuYW1lIjoiYWRtaW4gZWNzIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZWNzX2FkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJlY3MiLCJlbWFpbCI6ImVjc19hZG1pbkBmb2xpby5vcmcifQ.NqNbk0c4eV208f14aIf3o9xLDz_be8YSv83WhdE9h3atnEH2KuEWm_ulJDXhtXhRapQrp2U2tp1fw3aeUazV_l4qsLohkM_1cFBMM4hJlCk3vSVrXRoJZPkEPIh1TZ490Mo97oxVMmgXCOf4V0IwEGQFjMEnXhWUWThq9bqixu9QE9uH5YYWFop52dVl99uYo7BrwpeJXuv4sBiA0CpJu7hF4L6_OgIgKZmqYt0Kc9DOcHBfLpKeKYqHeEfiGm_WerT9z-jDHrE5Pv_wbz00eezM0qGGb5fkY5j1z9AQAP23H3JDCxgjuAT31Rb24f8Z_XjlQTMf04H46OJITod_hA"
+          },
+          {
+            "key": "origin",
+            "value": "https://eureka-bugfest-ramsons-consortium.int.aws.folio.org"
+          },
+          {
+            "key": "priority",
+            "value": "u=1, i"
+          },
+          {
+            "key": "referer",
+            "value": "https://eureka-bugfest-ramsons-consortium.int.aws.folio.org/"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "sec-fetch-dest",
+            "value": "empty"
+          },
+          {
+            "key": "sec-fetch-mode",
+            "value": "cors"
+          },
+          {
+            "key": "sec-fetch-site",
+            "value": "same-site"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "x-okapi-module-id",
+            "value": "mod-users-19.4.4"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "cs00000int"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647",
+          "protocol": "https",
+          "host": [
+            "kong-eureka-bugfest-ramsons-consortium",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "custom-fields"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "2147483647"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl 'https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8,uk;q=0.7' \\\n  -H 'content-type: application/json' \\\n  -H 'cookie: apt.uid=AP-YFGMCGUNNIFB-2-1729156257814-55227829.0.2.6b933aba-006b-4c12-b4b5-a0ddc2adfcf4; _ga=GA1.1.1214768550.1729156258; _ga_0C4M1PWYZ7=GS1.1.1729673316.3.0.1729673316.0.0.0; _ga_T11SF3WXX2=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_K2SPJK2C73=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_KP5SFCXJL1=GS1.1.1733222857.10.1.1733223452.0.0.0; folioAccessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKbDJ5anNaTm9TQTJRM1RWbDJCbkkyNHBXM1V5YndIYl9WRDVhU19PUnNNIn0.eyJleHAiOjE3MzM5ODc1NzMsImlhdCI6MTczMzk4NzEzNywiYXV0aF90aW1lIjoxNzMzOTgzOTczLCJqdGkiOiIyNGU1NmZiMS05ZTQ0LTQ0Y2QtOTZlZC1lNDk5NGZkYzhlMTYiLCJpc3MiOiJodHRwczovL2tleWNsb2FrLXJlYmYuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL2NzMDAwMDBpbnQiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZWNzX2FkbWluIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY3MwMDAwMGludC1hcHBsaWNhdGlvbiIsInNpZCI6ImE2OGY0MWU1LTk1Y2MtNDEwOC04ZmE5LTcyNzYwNjAxYzExMCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlF1aWNrIE1BUkMgQWxsIiwiNjU4ZGJmYmUxNzYyNzMxNmM3MDA5NTM4ZDczMzNlZWI3OTE3OTNhMCIsIm9mZmxpbmVfYWNjZXNzIiwiRUJTQ09BZG1pblJvbGUiLCJkZWZhdWx0LXJvbGVzLWNzMDAwMDBpbnQiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJkYTM5ZjVhOC1kYWMwLTRlNmUtODczMS04NjVjMTMzYWQxODciLCJuYW1lIjoiYWRtaW4gZWNzIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZWNzX2FkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJlY3MiLCJlbWFpbCI6ImVjc19hZG1pbkBmb2xpby5vcmcifQ.NqNbk0c4eV208f14aIf3o9xLDz_be8YSv83WhdE9h3atnEH2KuEWm_ulJDXhtXhRapQrp2U2tp1fw3aeUazV_l4qsLohkM_1cFBMM4hJlCk3vSVrXRoJZPkEPIh1TZ490Mo97oxVMmgXCOf4V0IwEGQFjMEnXhWUWThq9bqixu9QE9uH5YYWFop52dVl99uYo7BrwpeJXuv4sBiA0CpJu7hF4L6_OgIgKZmqYt0Kc9DOcHBfLpKeKYqHeEfiGm_WerT9z-jDHrE5Pv_wbz00eezM0qGGb5fkY5j1z9AQAP23H3JDCxgjuAT31Rb24f8Z_XjlQTMf04H46OJITod_hA' \\\n  -H 'origin: https://eureka-bugfest-ramsons-consortium.int.aws.folio.org' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://eureka-bugfest-ramsons-consortium.int.aws.folio.org/' \\\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \\\n  -H 'x-okapi-module-id: mod-users-19.4.4' \\\n  -H 'x-okapi-tenant: cs00000int'"
+      },
+      "response": []
+    },
+    {
+      "name": "https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647",
+      "id": "bc487505-5a54-425b-ad3f-0c094bd76c9b",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-GB,en-US;q=0.9,en;q=0.8,uk;q=0.7"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json"
+          },
+          {
+            "key": "cookie",
+            "value": "apt.uid=AP-YFGMCGUNNIFB-2-1729156257814-55227829.0.2.6b933aba-006b-4c12-b4b5-a0ddc2adfcf4; _ga=GA1.1.1214768550.1729156258; _ga_0C4M1PWYZ7=GS1.1.1729673316.3.0.1729673316.0.0.0; _ga_T11SF3WXX2=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_K2SPJK2C73=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_KP5SFCXJL1=GS1.1.1733222857.10.1.1733223452.0.0.0; folioAccessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKbDJ5anNaTm9TQTJRM1RWbDJCbkkyNHBXM1V5YndIYl9WRDVhU19PUnNNIn0.eyJleHAiOjE3MzM5OTA4MjYsImlhdCI6MTczMzk5MDIyNiwiYXV0aF90aW1lIjoxNzMzOTkwMjExLCJqdGkiOiI4MDZmNGZmYS01MDJjLTQ2ZDAtOTQ2NS02NmNlNjY0NDJlYTUiLCJpc3MiOiJodHRwczovL2tleWNsb2FrLXJlYmYuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL2NzMDAwMDBpbnQiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZWNzX2FkbWluIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY3MwMDAwMGludC1hcHBsaWNhdGlvbiIsInNpZCI6IjhhNmQ0OWIyLTYxOWItNDA3NS05NzFhLWJjYWE4OWI4ZWQ1YiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlF1aWNrIE1BUkMgQWxsIiwiNjU4ZGJmYmUxNzYyNzMxNmM3MDA5NTM4ZDczMzNlZWI3OTE3OTNhMCIsIm9mZmxpbmVfYWNjZXNzIiwiRUJTQ09BZG1pblJvbGUiLCJkZWZhdWx0LXJvbGVzLWNzMDAwMDBpbnQiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJkYTM5ZjVhOC1kYWMwLTRlNmUtODczMS04NjVjMTMzYWQxODciLCJuYW1lIjoiYWRtaW4gZWNzIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZWNzX2FkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJlY3MiLCJlbWFpbCI6ImVjc19hZG1pbkBmb2xpby5vcmcifQ.T4E-h3B-UM_cKSW3uXWtwiENEg4b0K6C9swrc6Alu9XQipLVoJcppD4NdWRupHZvvBEEewR8NdcnitPG42pUMQyU9QfnPJ0UUwOy-mR6zMJqbY4VUE3X-6Rf-k3VQIWMEJ63jZgmN2Qj9cUth-xG52vOJnWkB5zoad_h3WYbVNdwF4AGNtA4Aq4bGlH2n7XacZRaHGwG7jQNk5g8ku4nq5yoKmyH9zsy7tWQ-sy40ii1g71TUvC4DCIaoMidNRsX63WC9GFuDvKa5BmMruxkuWEPRgh61FWhKAGWKsnwRfwNkgxb8blU6hW-wTgkzk10HfUbXH4Npv3B-Ityoit9Qg"
+          },
+          {
+            "key": "origin",
+            "value": "https://eureka-bugfest-ramsons-consortium.int.aws.folio.org"
+          },
+          {
+            "key": "priority",
+            "value": "u=1, i"
+          },
+          {
+            "key": "referer",
+            "value": "https://eureka-bugfest-ramsons-consortium.int.aws.folio.org/"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "sec-fetch-dest",
+            "value": "empty"
+          },
+          {
+            "key": "sec-fetch-mode",
+            "value": "cors"
+          },
+          {
+            "key": "sec-fetch-site",
+            "value": "same-site"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "x-okapi-module-id",
+            "value": "mod-users-19.4.4"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "cs00000int"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647",
+          "protocol": "https",
+          "host": [
+            "kong-eureka-bugfest-ramsons-consortium",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "custom-fields"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "2147483647"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl 'https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8,uk;q=0.7' \\\n  -H 'content-type: application/json' \\\n  -H 'cookie: apt.uid=AP-YFGMCGUNNIFB-2-1729156257814-55227829.0.2.6b933aba-006b-4c12-b4b5-a0ddc2adfcf4; _ga=GA1.1.1214768550.1729156258; _ga_0C4M1PWYZ7=GS1.1.1729673316.3.0.1729673316.0.0.0; _ga_T11SF3WXX2=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_K2SPJK2C73=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_KP5SFCXJL1=GS1.1.1733222857.10.1.1733223452.0.0.0; folioAccessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKbDJ5anNaTm9TQTJRM1RWbDJCbkkyNHBXM1V5YndIYl9WRDVhU19PUnNNIn0.eyJleHAiOjE3MzM5OTA4MjYsImlhdCI6MTczMzk5MDIyNiwiYXV0aF90aW1lIjoxNzMzOTkwMjExLCJqdGkiOiI4MDZmNGZmYS01MDJjLTQ2ZDAtOTQ2NS02NmNlNjY0NDJlYTUiLCJpc3MiOiJodHRwczovL2tleWNsb2FrLXJlYmYuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL2NzMDAwMDBpbnQiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZWNzX2FkbWluIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY3MwMDAwMGludC1hcHBsaWNhdGlvbiIsInNpZCI6IjhhNmQ0OWIyLTYxOWItNDA3NS05NzFhLWJjYWE4OWI4ZWQ1YiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlF1aWNrIE1BUkMgQWxsIiwiNjU4ZGJmYmUxNzYyNzMxNmM3MDA5NTM4ZDczMzNlZWI3OTE3OTNhMCIsIm9mZmxpbmVfYWNjZXNzIiwiRUJTQ09BZG1pblJvbGUiLCJkZWZhdWx0LXJvbGVzLWNzMDAwMDBpbnQiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJkYTM5ZjVhOC1kYWMwLTRlNmUtODczMS04NjVjMTMzYWQxODciLCJuYW1lIjoiYWRtaW4gZWNzIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZWNzX2FkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJlY3MiLCJlbWFpbCI6ImVjc19hZG1pbkBmb2xpby5vcmcifQ.T4E-h3B-UM_cKSW3uXWtwiENEg4b0K6C9swrc6Alu9XQipLVoJcppD4NdWRupHZvvBEEewR8NdcnitPG42pUMQyU9QfnPJ0UUwOy-mR6zMJqbY4VUE3X-6Rf-k3VQIWMEJ63jZgmN2Qj9cUth-xG52vOJnWkB5zoad_h3WYbVNdwF4AGNtA4Aq4bGlH2n7XacZRaHGwG7jQNk5g8ku4nq5yoKmyH9zsy7tWQ-sy40ii1g71TUvC4DCIaoMidNRsX63WC9GFuDvKa5BmMruxkuWEPRgh61FWhKAGWKsnwRfwNkgxb8blU6hW-wTgkzk10HfUbXH4Npv3B-Ityoit9Qg' \\\n  -H 'origin: https://eureka-bugfest-ramsons-consortium.int.aws.folio.org' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://eureka-bugfest-ramsons-consortium.int.aws.folio.org/' \\\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \\\n  -H 'x-okapi-module-id: mod-users-19.4.4' \\\n  -H 'x-okapi-tenant: cs00000int'"
+      },
+      "response": []
+    },
+    {
+      "name": "https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647",
+      "id": "5b6c73eb-5825-4358-ba68-3755279d21de",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-GB,en-US;q=0.9,en;q=0.8,uk;q=0.7"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json"
+          },
+          {
+            "key": "cookie",
+            "value": "apt.uid=AP-YFGMCGUNNIFB-2-1729156257814-55227829.0.2.6b933aba-006b-4c12-b4b5-a0ddc2adfcf4; _ga=GA1.1.1214768550.1729156258; _ga_0C4M1PWYZ7=GS1.1.1729673316.3.0.1729673316.0.0.0; _ga_T11SF3WXX2=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_K2SPJK2C73=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_KP5SFCXJL1=GS1.1.1733222857.10.1.1733223452.0.0.0; folioAccessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKbDJ5anNaTm9TQTJRM1RWbDJCbkkyNHBXM1V5YndIYl9WRDVhU19PUnNNIn0.eyJleHAiOjE3MzM5OTM2NTksImlhdCI6MTczMzk5MzA1OSwiYXV0aF90aW1lIjoxNzMzOTkwMjExLCJqdGkiOiI4OTAyNThiOS1hYTkzLTQ0NDgtODBmMS1iM2U2MmIwMzZhMzEiLCJpc3MiOiJodHRwczovL2tleWNsb2FrLXJlYmYuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL2NzMDAwMDBpbnQiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZWNzX2FkbWluIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY3MwMDAwMGludC1hcHBsaWNhdGlvbiIsInNpZCI6IjhhNmQ0OWIyLTYxOWItNDA3NS05NzFhLWJjYWE4OWI4ZWQ1YiIsImFjciI6IjAiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlF1aWNrIE1BUkMgQWxsIiwiNjU4ZGJmYmUxNzYyNzMxNmM3MDA5NTM4ZDczMzNlZWI3OTE3OTNhMCIsIm9mZmxpbmVfYWNjZXNzIiwiRUJTQ09BZG1pblJvbGUiLCJkZWZhdWx0LXJvbGVzLWNzMDAwMDBpbnQiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJkYTM5ZjVhOC1kYWMwLTRlNmUtODczMS04NjVjMTMzYWQxODciLCJuYW1lIjoiYWRtaW4gZWNzIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZWNzX2FkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJlY3MiLCJlbWFpbCI6ImVjc19hZG1pbkBmb2xpby5vcmcifQ.L5RKuHsQoDXD9-j-3iYQq9KwyAXsQqFhPkiEwecX-pzOoxOqwSCn4Al26zxiF6K6AUZ3LOzQXuU-f35BflQ5woRkGYRcG5LT-kXGbV6KEMgnsjq_B-PRnOw8jckRSoFbC-bTMtbfRoonqOfQ0PkNPVdrgFY_Wlhl6RDA8b_SQUn_knDVN6BB5_gV1-7KBcdw3GDMI7o5oXmxEf1RxXh4bN4Io-jK3ujDMQ4TaTEoLEx9_aFMzV6X3PdZ9k7K5nFolUgVAreWdnGyh_9bWpiFjmb2OMYCqxk3DudLGTGPfV7OSnceIV-6aPWT4WuhMSMTXV3CM2Fh5HTv2YexM6dhKA"
+          },
+          {
+            "key": "origin",
+            "value": "https://eureka-bugfest-ramsons-consortium.int.aws.folio.org"
+          },
+          {
+            "key": "priority",
+            "value": "u=1, i"
+          },
+          {
+            "key": "referer",
+            "value": "https://eureka-bugfest-ramsons-consortium.int.aws.folio.org/"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          },
+          {
+            "key": "sec-fetch-dest",
+            "value": "empty"
+          },
+          {
+            "key": "sec-fetch-mode",
+            "value": "cors"
+          },
+          {
+            "key": "sec-fetch-site",
+            "value": "same-site"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "x-okapi-module-id",
+            "value": "mod-users-19.4.4"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "cs00000int"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647",
+          "protocol": "https",
+          "host": [
+            "kong-eureka-bugfest-ramsons-consortium",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "custom-fields"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "2147483647"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl 'https://kong-eureka-bugfest-ramsons-consortium.int.aws.folio.org/custom-fields?limit=2147483647' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8,uk;q=0.7' \\\n  -H 'content-type: application/json' \\\n  -H 'cookie: apt.uid=AP-YFGMCGUNNIFB-2-1729156257814-55227829.0.2.6b933aba-006b-4c12-b4b5-a0ddc2adfcf4; _ga=GA1.1.1214768550.1729156258; _ga_0C4M1PWYZ7=GS1.1.1729673316.3.0.1729673316.0.0.0; _ga_T11SF3WXX2=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_K2SPJK2C73=GS1.1.1729673316.3.0.1729673316.60.0.0; _ga_KP5SFCXJL1=GS1.1.1733222857.10.1.1733223452.0.0.0; folioAccessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKbDJ5anNaTm9TQTJRM1RWbDJCbkkyNHBXM1V5YndIYl9WRDVhU19PUnNNIn0.eyJleHAiOjE3MzM5OTM2NTksImlhdCI6MTczMzk5MzA1OSwiYXV0aF90aW1lIjoxNzMzOTkwMjExLCJqdGkiOiI4OTAyNThiOS1hYTkzLTQ0NDgtODBmMS1iM2U2MmIwMzZhMzEiLCJpc3MiOiJodHRwczovL2tleWNsb2FrLXJlYmYuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL2NzMDAwMDBpbnQiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZWNzX2FkbWluIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY3MwMDAwMGludC1hcHBsaWNhdGlvbiIsInNpZCI6IjhhNmQ0OWIyLTYxOWItNDA3NS05NzFhLWJjYWE4OWI4ZWQ1YiIsImFjciI6IjAiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlF1aWNrIE1BUkMgQWxsIiwiNjU4ZGJmYmUxNzYyNzMxNmM3MDA5NTM4ZDczMzNlZWI3OTE3OTNhMCIsIm9mZmxpbmVfYWNjZXNzIiwiRUJTQ09BZG1pblJvbGUiLCJkZWZhdWx0LXJvbGVzLWNzMDAwMDBpbnQiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInVzZXJfaWQiOiJkYTM5ZjVhOC1kYWMwLTRlNmUtODczMS04NjVjMTMzYWQxODciLCJuYW1lIjoiYWRtaW4gZWNzIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZWNzX2FkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJlY3MiLCJlbWFpbCI6ImVjc19hZG1pbkBmb2xpby5vcmcifQ.L5RKuHsQoDXD9-j-3iYQq9KwyAXsQqFhPkiEwecX-pzOoxOqwSCn4Al26zxiF6K6AUZ3LOzQXuU-f35BflQ5woRkGYRcG5LT-kXGbV6KEMgnsjq_B-PRnOw8jckRSoFbC-bTMtbfRoonqOfQ0PkNPVdrgFY_Wlhl6RDA8b_SQUn_knDVN6BB5_gV1-7KBcdw3GDMI7o5oXmxEf1RxXh4bN4Io-jK3ujDMQ4TaTEoLEx9_aFMzV6X3PdZ9k7K5nFolUgVAreWdnGyh_9bWpiFjmb2OMYCqxk3DudLGTGPfV7OSnceIV-6aPWT4WuhMSMTXV3CM2Fh5HTv2YexM6dhKA' \\\n  -H 'origin: https://eureka-bugfest-ramsons-consortium.int.aws.folio.org' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://eureka-bugfest-ramsons-consortium.int.aws.folio.org/' \\\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36' \\\n  -H 'x-okapi-module-id: mod-users-19.4.4' \\\n  -H 'x-okapi-tenant: cs00000int'"
+      },
+      "response": []
+    },
+    {
+      "name": "_/proxy/tenants INT Copy",
+      "id": "47830ef2-7e7e-49f7-8761-b4cfed6e0be3",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenantID}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{x-okapi-token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-{{cluster}}-{{aws_region}}.int.aws.folio.org/_/proxy/tenants",
+          "protocol": "https",
+          "host": [
+            "okapi-{{cluster}}-{{aws_region}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "https://edge-tls-bugfest-sunflower.int.aws.folio.org/dcbService/dcb/shadow-locations/refresh?apiKey=eyJzIjoiUGNLTVdVc2V5ViIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9%27 \\\n--header Content-Type:",
+      "id": "25ad235a-79fb-44fe-9f82-66292c0032d9",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://edge-tls-bugfest-sunflower.int.aws.folio.org/dcbService/dcb/shadow-locations/refresh?apiKey=eyJzIjoiUGNLTVdVc2V5ViIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9%27 \\\n--header Content-Type:",
+          "protocol": "https",
+          "host": [
+            "edge-tls-bugfest-sunflower",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "dcbService",
+            "dcb",
+            "shadow-locations",
+            "refresh"
+          ],
+          "query": [
+            {
+              "key": "apiKey",
+              "value": "eyJzIjoiUGNLTVdVc2V5ViIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9%27 \\\n--header Content-Type:"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl --location 'https://edge-tls-bugfest-sunflower.int.aws.folio.org/dcbService/dcb/shadow-locations/refresh?apiKey=eyJzIjoiUGNLTVdVc2V5ViIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9%27 \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"agencies\": [\n        {\n            \"name\": \"agen 1\",\n            \"code\": \"agen1\"\n        },\n        {\n            \"name\": \"agen 2\",\n            \"code\": \"agen2\"\n        }\n    ],\n    \"locations\": [\n        {\n            \"name\": \"shad-loc1-name\",\n            \"code\": \"shad-loc1-code\",\n            \"agency\": {\n                \"name\": \"agen 1\",\n                \"code\": \"agen1\"\n            }\n        },\n        {\n            \"name\": \"shad-loc2-name\",\n            \"code\": \"shad-loc2-code\",\n            \"agency\": {\n                \"name\": \"agen 2\",\n                \"code\": \"agen2\"\n            }\n        }\n    ]\n}'"
+      },
+      "response": []
+    }
+  ]
+}

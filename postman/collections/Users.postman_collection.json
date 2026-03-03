@@ -1,0 +1,915 @@
+{
+  "info": {
+    "_postman_id": "7d236498-9ac2-416c-bbb6-ba7f4b343d69",
+    "name": "Users",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "c0ef53ba-adb1-4fb6-b353-8b1f96e1872d",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "krtest01",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"2b019b1b-9924-4bd4-b49e-54cddc85c7db\",\n    \"username\": \"testuser\",\n    \"active\": true,\n    \"type\": \"system\",\n    \"personal\": {\n        \"firstName\": \"teseter\",\n        \"lastName\": \"tester\",\n        \"email\": \"fse.hosting@ebsco.com\",\n        \"peferredContactTypeId\": \"002\"\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/users-keycloak/users",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "users-keycloak",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check credentials existence",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "e6180f5c-60c8-466d-b21a-b17ac9f65311",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authn/credentials-existence?userId=a8e2ea01-6bce-44d4-acd2-0db59edf536f",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authn",
+            "credentials-existence"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "a8e2ea01-6bce-44d4-acd2-0db59edf536f"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "0164ee28-4fb6-4dce-9b95-ba54adf54414",
+          "name": "ochko",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "krtest01",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/authn/credentials-existence?userId=2b019b1b-9924-4bd4-b49e-54cddc85c7db",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "authn",
+                "credentials-existence"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "2b019b1b-9924-4bd4-b49e-54cddc85c7db"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 17 Jan 2024 18:28:52 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Server",
+              "value": "nginx/1.18.0 (Ubuntu)"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "X-Kong-Upstream-Latency",
+              "value": "28"
+            },
+            {
+              "key": "X-Kong-Proxy-Latency",
+              "value": "1"
+            },
+            {
+              "key": "Via",
+              "value": "kong/3.4.1"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"errors\": [\n        {\n            \"message\": \"Failed to get credentials for a user: 2b019b1b-9924-4bd4-b49e-54cddc85c7db\",\n            \"type\": \"ServiceException\",\n            \"code\": \"service_error\",\n            \"parameters\": [\n                {\n                    \"key\": \"cause\",\n                    \"value\": \"[401 ] during [GET] to [https://keycloak-krtest.int.aws.folio.org/admin/realms/krtest01/users?q=user_id%3A2b019b1b-9924-4bd4-b49e-54cddc85c7db&briefRepresentation=true] [KeycloakUserClient#findUsersWithAttrs(String,String,String,boolean)]: [{\\\"error\\\":\\\"HTTP 401 Unauthorized\\\"}]\"\n                }\n            ]\n        }\n    ],\n    \"total_records\": 1\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get users",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "34a0f707-42c4-4b3b-80f2-a55d86dae5e8",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/users-keycloak/users",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "users-keycloak",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get users from  mod-users",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "b963f31e-4af8-402e-b214-9fde9269ba2e",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/users?query=username=EBSCOAdmin",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "users"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "username=EBSCOAdmin"
+            },
+            {
+              "key": "query",
+              "value": "type=shadow",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create creds",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "763475b6-c50c-4f85-9440-dea9bc163087",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"da39f5a8-dac0-4e6e-8731-865c133ad187\",\n    \"username\": \"ecs_admin \",\n    \"password\": \"admin\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authn/credentials",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authn",
+            "credentials"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create creds Copy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "2b2f700d-9835-48f0-b2d4-9fbe9dfbaa76",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "krtest01",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"2b019b1b-9924-4bd4-b49e-54cddc85c7db\",\n    \"username\": \"testuser\",\n    \"password\": \"testuser\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authn/credentials",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authn",
+            "credentials"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "authn get",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "59d60b45-eda2-47be-a626-b84fc31ddc78",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "krtest01",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authn/log/events",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authn",
+            "log",
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reset through keycloak",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'password'},\r",
+              "            {key: 'client_id', value: 'admin-cli'},\r",
+              "            {key: 'password', value: pm.environment.get('keycloak_password')},\r",
+              "            {key: 'username', value: 'admin'}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "254d7bc0-1b9a-4084-90bf-8b0776f9f6eb",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{okapi-token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "",
+            "value": "{{okapi-token}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "krtest01",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"temporary\": false,\n    \"type\": \"password\",\n    \"value\": \"DoXJhL3hj8csA3UKnBl4UOGI\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://keycloak-{{folio}}.{{domain}}/admin/realms/{{realm}}/users/31634db5-3073-4b52-9a0b-01a613a6417e/reset-password",
+          "protocol": "https",
+          "host": [
+            "keycloak-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "admin",
+            "realms",
+            "{{realm}}",
+            "users",
+            "31634db5-3073-4b52-9a0b-01a613a6417e",
+            "reset-password"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Keycloak users",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'password'},\r",
+              "            {key: 'client_id', value: 'admin-cli'},\r",
+              "            {key: 'password', value: pm.environment.get('keycloak_password')},\r",
+              "            {key: 'username', value: 'admin'}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "3f393a9c-79ea-43e7-b5f8-f5eb43391906",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{okapi-token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "{{okapi-token}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "krtest01",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"temporary\": false,\n    \"type\": \"password\",\n    \"value\": \"DoXJhL3hj8csA3UKnBl4UOGI\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://keycloak-{{folio}}.{{domain}}/admin/realms/{{realm}}/users?username=mod-search-ebsco&exact=true",
+          "protocol": "https",
+          "host": [
+            "keycloak-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "admin",
+            "realms",
+            "{{realm}}",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "username",
+              "value": "mod-search-ebsco"
+            },
+            {
+              "key": "exact",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete creds",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "0740d026-143a-49fd-aec5-ee62909dcc6d",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authn/credentials?userId=a8e2ea01-6bce-44d4-acd2-0db59edf536f",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authn",
+            "credentials"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "a8e2ea01-6bce-44d4-acd2-0db59edf536f"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "2dc0f7f1-be1f-4f8d-9bd9-271f80f5cb77",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/users-keycloak/users/:user_id",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "users-keycloak",
+            "users",
+            ":user_id"
+          ],
+          "variable": [
+            {
+              "key": "user_id",
+              "value": "48bd83fd-6c90-4878-8b36-d6cb9005a0f7"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

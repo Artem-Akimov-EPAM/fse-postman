@@ -1,0 +1,3525 @@
+{
+  "info": {
+    "_postman_id": "aefe66f7-e527-489d-9ec9-8baa09ebdf49",
+    "name": "Eureka",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Keycloak",
+      "item": [
+        {
+          "name": "Get keycloack client config",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "469e65bb-22c4-4ae0-81db-1213c693b2b5",
+                "exec": [
+                  "pm.environment.set(\"okapi-token\", pm.response.json().access_token);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "795bab86-7532-4e65-8149-cd34467589fe",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;",
+                  "",
+                  "",
+                  "pm.sendRequest({",
+                  "    url: keycloakUrl,",
+                  "    method: 'POST',",
+                  "    header: {",
+                  "        'content-type': 'application/x-www-form-urlencoded'",
+                  "    },",
+                  "    body: {",
+                  "        mode: 'urlencoded',",
+                  "        urlencoded: [",
+                  "            {key: 'grant_type', value: 'password'},",
+                  "            {key: 'client_id', value: 'admin-cli'},",
+                  "            {key: 'password', value: pm.environment.get('keycloak_password')},",
+                  "            {key: 'username', value: 'admin'}",
+                  "        ]",
+                  "    }",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "cd2485c1-4fe3-459a-8a56-59e69345d84c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{okapi-token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://keycloak-{{folio}}.{{domain}}/admin/realms/{{realm}}/clients/189fa605-2556-43e0-9f25-438e58ee329e",
+              "protocol": "https",
+              "host": [
+                "keycloak-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{realm}}",
+                "clients",
+                "189fa605-2556-43e0-9f25-438e58ee329e"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get keycloack realms",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "469e65bb-22c4-4ae0-81db-1213c693b2b5",
+                "exec": [
+                  "pm.environment.set(\"okapi-token\", pm.response.json().access_token);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "795bab86-7532-4e65-8149-cd34467589fe",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;",
+                  "",
+                  "",
+                  "pm.sendRequest({",
+                  "    url: keycloakUrl,",
+                  "    method: 'POST',",
+                  "    header: {",
+                  "        'content-type': 'application/x-www-form-urlencoded'",
+                  "    },",
+                  "    body: {",
+                  "        mode: 'urlencoded',",
+                  "        urlencoded: [",
+                  "            {key: 'grant_type', value: 'password'},",
+                  "            {key: 'client_id', value: 'admin-cli'},",
+                  "            {key: 'password', value: pm.environment.get('keycloak_password')},",
+                  "            {key: 'username', value: 'admin'}",
+                  "        ]",
+                  "    }",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "24bc3e61-a82b-4841-8645-f091780762eb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{okapi-token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://keycloak-{{folio}}.{{domain}}/admin/realms",
+              "protocol": "https",
+              "host": [
+                "keycloak-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "admin",
+                "realms"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get keycloack realm config",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "469e65bb-22c4-4ae0-81db-1213c693b2b5",
+                "exec": [
+                  "pm.environment.set(\"okapi-token\", pm.response.json().access_token);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "795bab86-7532-4e65-8149-cd34467589fe",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;",
+                  "",
+                  "",
+                  "pm.sendRequest({",
+                  "    url: keycloakUrl,",
+                  "    method: 'POST',",
+                  "    header: {",
+                  "        'content-type': 'application/x-www-form-urlencoded'",
+                  "    },",
+                  "    body: {",
+                  "        mode: 'urlencoded',",
+                  "        urlencoded: [",
+                  "            {key: 'grant_type', value: 'password'},",
+                  "            {key: 'client_id', value: 'admin-cli'},",
+                  "            {key: 'password', value: pm.environment.get('keycloak_password')},",
+                  "            {key: 'username', value: 'admin'}",
+                  "        ]",
+                  "    }",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "09c32615-4a66-4467-bfab-85d7ba5c2cac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{okapi-token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://keycloak-{{folio}}.int.aws.folio.org/admin/realms/{{realm}}",
+              "protocol": "https",
+              "host": [
+                "keycloak-{{folio}}",
+                "int",
+                "aws",
+                "folio",
+                "org"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{realm}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get keycloack user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "469e65bb-22c4-4ae0-81db-1213c693b2b5",
+                "exec": [
+                  "pm.environment.set(\"okapi-token\", pm.response.json().access_token);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "795bab86-7532-4e65-8149-cd34467589fe",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;",
+                  "",
+                  "",
+                  "pm.sendRequest({",
+                  "    url: keycloakUrl,",
+                  "    method: 'POST',",
+                  "    header: {",
+                  "        'content-type': 'application/x-www-form-urlencoded'",
+                  "    },",
+                  "    body: {",
+                  "        mode: 'urlencoded',",
+                  "        urlencoded: [",
+                  "            {key: 'grant_type', value: 'password'},",
+                  "            {key: 'client_id', value: 'admin-cli'},",
+                  "            {key: 'password', value: pm.environment.get('keycloak_password')},",
+                  "            {key: 'username', value: 'admin'}",
+                  "        ]",
+                  "    }",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "dbbefcfa-6e06-4777-a0e9-55ffc6874ea1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{okapi-token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://keycloak-{{folio}}.int.aws.folio.org/admin/realms/{{realm}}/users",
+              "protocol": "https",
+              "host": [
+                "keycloak-{{folio}}",
+                "int",
+                "aws",
+                "folio",
+                "org"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{realm}}",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Keycloak role-mappings",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "6a2cd7c1-a9de-4c68-8052-0eea139fac75",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'password'},\r",
+                  "            {key: 'client_id', value: 'admin-cli'},\r",
+                  "            {key: 'password', value: pm.environment.get('keycloak_password')},\r",
+                  "            {key: 'username', value: 'tmpadm'}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "c8066ef4-bb1b-43a7-aec1-650acd609830",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{okapi-token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[{\"id\": \"5ee5b5b1-5b90-4135-b329-db0280cd9f5f\", \"name\": \"admin\"}]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://keycloak-{{folio}}.int.aws.folio.org/admin/realms/master/users/:userid/role-mappings/realm",
+              "protocol": "https",
+              "host": [
+                "keycloak-{{folio}}",
+                "int",
+                "aws",
+                "folio",
+                "org"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "master",
+                "users",
+                ":userid",
+                "role-mappings",
+                "realm"
+              ],
+              "variable": [
+                {
+                  "key": "userid",
+                  "value": "b2f0a315-1fbf-481e-89fa-62ae95a07c51"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Keycloak create users",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "91078642-4032-4462-bc08-219bb26f6c0a",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'password'},\r",
+                  "            {key: 'client_id', value: 'admin-cli'},\r",
+                  "            {key: 'password', value: pm.environment.get('keycloak_password')},\r",
+                  "            {key: 'username', value: 'admin'}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "df1fef62-2450-45b1-a71b-8431f7764f40",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "5f0354e1-929a-4f5e-b2ce-2bde94d25b22",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{okapi-token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\":\"test123\",\"realmRoles\":[\"5ee5b5b1-5b90-4135-b329-db0280cd9f5f\"],\"credentials\":[{\"temporary\":false,\"type\":\"password\",\"value\":\"XMsch7NjSzTHL3dD\"}],\"access\":{\"manageGroupMembership\":true,\"view\":true,\"mapRoles\":true,\"impersonate\":true,\"manage\":true}, \"enabled\": true}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://keycloak-{{folio}}.int.aws.folio.org/admin/realms/master/users",
+              "protocol": "https",
+              "host": [
+                "keycloak-{{folio}}",
+                "int",
+                "aws",
+                "folio",
+                "org"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "master",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "4e68ff12-1015-4499-9595-ece6db7c3f37"
+    },
+    {
+      "name": "timers",
+      "item": [
+        {
+          "name": "get timers",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "d433ce12-ebeb-43c7-bb63-eb26e3e7b1b3",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'client_credentials'},\r",
+                  "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "3c243a7e-c88a-41a9-90ee-a3930ef2b685",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}",
+                "type": "text"
+              },
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/scheduler/timers?limit=500",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "scheduler",
+                "timers"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "enabled==false",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "500"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete timer",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "d433ce12-ebeb-43c7-bb63-eb26e3e7b1b3",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'client_credentials'},\r",
+                  "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "ce643fdd-16af-4fe0-bf00-36b438cf895b",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}",
+                "type": "text"
+              },
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/scheduler/timers/:timer_id",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "scheduler",
+                "timers",
+                ":timer_id"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "enabled==false",
+                  "disabled": true
+                },
+                {
+                  "key": "id",
+                  "value": "",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "timer_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create timer",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "d433ce12-ebeb-43c7-bb63-eb26e3e7b1b3",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'client_credentials'},\r",
+                  "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "ab64746d-ffb6-4f43-b809-b8bf898d6224",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}",
+                "type": "text"
+              },
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/scheduler/timers?limit=500",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "scheduler",
+                "timers"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "enabled==false",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "500"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "be34a9cc-9768-4cea-aba8-4d6f67c9d838"
+    },
+    {
+      "name": "Eureka get tenant token for user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "50db38fb-360f-4427-8b7f-86a05ecc6d7a",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "7fd9810f-0501-41d2-a58f-1c5097d70559",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"{{tenant_username}}\",\n    \"password\": \"{{tenant_password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authn/login-with-expiry",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authn",
+            "login-with-expiry"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "username =testuser11",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "100",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get keycloack admin token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "b35d77d0-3ab4-4923-9410-2dbf5081bfad",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "003970a0-d86d-4f39-8400-c1f492193604",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "password",
+              "type": "text"
+            },
+            {
+              "key": "username",
+              "value": "{{keycloak_username}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{keycloak_password}}",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "admin-cli",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://keycloak-{{folio}}.{{domain}}/realms/master/protocol/openid-connect/token",
+          "protocol": "https",
+          "host": [
+            "keycloak-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "realms",
+            "master",
+            "protocol",
+            "openid-connect",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get keycloack master realm token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "469e65bb-22c4-4ae0-81db-1213c693b2b5",
+            "exec": [
+              "pm.environment.set(\"okapi-token\", pm.response.json().access_token);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "5c8b05c1-40f8-4d09-8a58-6036a05d9cb8",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "client_credentials",
+              "type": "text"
+            },
+            {
+              "key": "username",
+              "value": "{{keycloak_username}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{keycloak_password}}",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "folio-backend-admin-client",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "{{admin_client_secret}}",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://keycloak-{{folio}}.{{domain}}/realms/{{master_realm}}/protocol/openid-connect/token",
+          "protocol": "https",
+          "host": [
+            "keycloak-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "realms",
+            "{{master_realm}}",
+            "protocol",
+            "openid-connect",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get keycloack tenant realm token Copy",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "469e65bb-22c4-4ae0-81db-1213c693b2b5",
+            "exec": [
+              "pm.environment.set(\"okapi-token\", pm.response.json().access_token);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "368cec86-14c2-478c-a3b6-248da402231d",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "client_credentials",
+              "type": "text"
+            },
+            {
+              "key": "username",
+              "value": "{{keycloak_username}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{keycloak_password}}",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "{{tenant_client}}",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "{{tenant_client_secret}}",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "{{admin_client_secret}}",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://keycloak-{{folio}}.{{domain}}/realms/{{realm}}/protocol/openid-connect/token",
+          "protocol": "https",
+          "host": [
+            "keycloak-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "realms",
+            "{{realm}}",
+            "protocol",
+            "openid-connect",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update keyckloak client confg",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "469e65bb-22c4-4ae0-81db-1213c693b2b5",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "3e7f40e4-0c0c-43ca-96bf-9ab5f5ea478a",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;",
+              "",
+              "",
+              "pm.sendRequest({",
+              "    url: keycloakUrl,",
+              "    method: 'POST',",
+              "    header: {",
+              "        'content-type': 'application/x-www-form-urlencoded'",
+              "    },",
+              "    body: {",
+              "        mode: 'urlencoded',",
+              "        urlencoded: [",
+              "            {key: 'grant_type', value: 'password'},",
+              "            {key: 'client_id', value: 'admin-cli'},",
+              "            {key: 'password', value: pm.environment.get('keycloak_password')},",
+              "            {key: 'username', value: 'admin'}",
+              "        ]",
+              "    }",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "9e8cc8ad-cb67-45a3-8142-08027a1bfa47",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{okapi-token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"attributes\": {\n        \"oauth2.device.authorization.grant.enabled\": \"true\"\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://keycloak-{{folio}}.int.aws.folio.org/admin/realms/{{realm}}/clients/189fa605-2556-43e0-9f25-438e58ee329e",
+          "protocol": "https",
+          "host": [
+            "keycloak-{{folio}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "admin",
+            "realms",
+            "{{realm}}",
+            "clients",
+            "189fa605-2556-43e0-9f25-438e58ee329e"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update keyckloak realm confg",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "469e65bb-22c4-4ae0-81db-1213c693b2b5",
+            "exec": [
+              "//pm.environment.set(\"okapi-token\", pm.response.json().access_token);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "3e7f40e4-0c0c-43ca-96bf-9ab5f5ea478a",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;",
+              "",
+              "",
+              "pm.sendRequest({",
+              "    url: keycloakUrl,",
+              "    method: 'POST',",
+              "    header: {",
+              "        'content-type': 'application/x-www-form-urlencoded'",
+              "    },",
+              "    body: {",
+              "        mode: 'urlencoded',",
+              "        urlencoded: [",
+              "            {key: 'grant_type', value: 'password'},",
+              "            {key: 'client_id', value: 'admin-cli'},",
+              "            {key: 'password', value: pm.environment.get('keycloak_password')},",
+              "            {key: 'username', value: 'admin'}",
+              "        ]",
+              "    }",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "751b9f08-450d-4907-aff6-30c52485a2d3",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{okapi-token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"loginTheme\": \"base\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://keycloak-{{folio}}.int.aws.folio.org/admin/realms/{{realm}}",
+          "protocol": "https",
+          "host": [
+            "keycloak-{{folio}}",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "admin",
+            "realms",
+            "{{realm}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get tenants",
+      "id": "7abf9e82-192f-4dfe-be1b-c923b3a8a97d",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/tenants?limit=100",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "tenants"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "test reques",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "a2de64e2-f764-457e-8a94-295cd51dff19",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "c110ffda-9e2f-4a7a-bcfa-c3723522f3dc",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/capability-sets?query=permission%3D%3D%28%22circulation.all%22+or+%22circulation-storage.request-preferences.item.get%22+or+%22circulation-storage.request-preferences.collection.get%22+or+%22inn-reach.central-servers.collection.get%22+or+%22inn-reach.central-servers.item.get%22+or+%22inn-reach.all%22+or+%22inn-reach.central-servers.all%22+or+%22inn-reach.central-servers.contribution-criteria-configuration.all%22+or+%22inn-reach.locations.all%22+or+%22inn-reach.material-type-mappings.all%22+or+%22inn-reach.library-mappings.all%22+or+%22inn-reach.location-mappings.all%22+or+%22inn-reach.authentication.all%22+or+%22inn-reach.central-servers.item-contribution-options-configuration.all%22+or+%22inn-reach.agency-mappings.all%22+or+%22inn-reach.central-servers.marc-transformation-options-settings.all%22+or+%22inn-reach.patron-type-mappings.all%22+or+%22inn-reach.contributions.all%22+or+%22inn-reach.item-type-mappings.all%22+or+%22inn-reach.user-custom-field-mappings.all%22+or+%22inn-reach.central-patron-type-mappings.all%22+or+%22inn-reach.d2ir.inn-reach-transaction.all%22+or+%22inn-reach.d2ir.bib-info.all%22+or+%22inn-reach.d2ir.patron-info.all%22+or+%22inn-reach.central-server.sys-configuration.all%22+or+%22inn-reach.inn-reach-transactions.all%22+or+%22inn-reach.recall-user.all%22+or+%22inn-reach.central-servers.visible-patron-field-configuration.all%22+or+%22inn-reach.central-servers.paging-slip-template.all%22+or+%22inn-reach.paging-slips.all%22+or+%22ui-inn-reach.app.all%22+or+%22inventory.all%22+or+%22inventory-storage.all%22+or+%22users.item.get%22%29&limit=500",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "capability-sets"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "permission%3D%3D%28%22circulation.all%22+or+%22circulation-storage.request-preferences.item.get%22+or+%22circulation-storage.request-preferences.collection.get%22+or+%22inn-reach.central-servers.collection.get%22+or+%22inn-reach.central-servers.item.get%22+or+%22inn-reach.all%22+or+%22inn-reach.central-servers.all%22+or+%22inn-reach.central-servers.contribution-criteria-configuration.all%22+or+%22inn-reach.locations.all%22+or+%22inn-reach.material-type-mappings.all%22+or+%22inn-reach.library-mappings.all%22+or+%22inn-reach.location-mappings.all%22+or+%22inn-reach.authentication.all%22+or+%22inn-reach.central-servers.item-contribution-options-configuration.all%22+or+%22inn-reach.agency-mappings.all%22+or+%22inn-reach.central-servers.marc-transformation-options-settings.all%22+or+%22inn-reach.patron-type-mappings.all%22+or+%22inn-reach.contributions.all%22+or+%22inn-reach.item-type-mappings.all%22+or+%22inn-reach.user-custom-field-mappings.all%22+or+%22inn-reach.central-patron-type-mappings.all%22+or+%22inn-reach.d2ir.inn-reach-transaction.all%22+or+%22inn-reach.d2ir.bib-info.all%22+or+%22inn-reach.d2ir.patron-info.all%22+or+%22inn-reach.central-server.sys-configuration.all%22+or+%22inn-reach.inn-reach-transactions.all%22+or+%22inn-reach.recall-user.all%22+or+%22inn-reach.central-servers.visible-patron-field-configuration.all%22+or+%22inn-reach.central-servers.paging-slip-template.all%22+or+%22inn-reach.paging-slips.all%22+or+%22ui-inn-reach.app.all%22+or+%22inventory.all%22+or+%22inventory-storage.all%22+or+%22users.item.get%22%29"
+            },
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete eureka tenant",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "1b850075-7788-41ac-bd48-75442b58422e",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "8bd8a6a2-bfcc-4990-a328-ebc6aa902595",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/tenants/:tenant_id",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "tenants",
+            ":tenant_id"
+          ],
+          "variable": [
+            {
+              "key": "tenant_id",
+              "value": "9ad2b6cf-83c3-4627-bc9b-1710dbfd1bee"
+            }
+          ]
+        },
+        "description": "Deletes a specific tenant from the Eureka system.\n\n**Purpose:**\nRemoves the tenant identified by `tenant_id` from the system. This action is irreversible and will permanently delete all associated data for the specified tenant.\n\n**Required Parameters:**\n- `tenant_id` (path variable): The unique identifier of the tenant to be deleted. Example: `3097ee2e-002e-421b-a47d-5e6f476b734b`\n\n**Authentication:**\n- Requires a valid `x-okapi-token` header. The token must have administrative privileges to perform tenant deletion.\n\n**Expected Behavior:**\n- On success, returns a 204 No Content status, indicating the tenant was deleted.\n- If the tenant does not exist, returns a 404 Not Found.\n- If authentication fails or permissions are insufficient, returns a 401 or 403 error.\n\n**When to use:**\nUse this endpoint when you need to permanently remove a tenant and all its data from the Eureka environment. Ensure you have backed up any necessary information before proceeding."
+      },
+      "response": []
+    },
+    {
+      "name": "Enable application for tenant",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "f3e4f8ca-d0fd-4bf0-9e7f-7850f8f3396b",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('master_realm')}/protocol/openid-connect/token`;",
+              "",
+              "",
+              "pm.sendRequest({",
+              "    url: keycloakUrl,",
+              "    method: 'POST',",
+              "    header: {",
+              "        'content-type': 'application/x-www-form-urlencoded'",
+              "    },",
+              "    body: {",
+              "        mode: 'urlencoded',",
+              "        urlencoded: [",
+              "            {key: 'grant_type', value: 'client_credentials'},",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}",
+              "        ]",
+              "    }",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "59424955-00f0-49c8-bc2e-2e47dc1ee4a7",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"tenantId\": \"1e8c2d66-4907-4b1e-822d-883abe0117f1\",\n    \"applications\": [\"app-acquisitions-1.0.18\",\"app-bulk-edit-1.0.5\",\"app-consortia-1.2.1\",\"app-dcb-1.1.0\",\"app-edge-complete-2.0.4\",\"app-erm-usage-2.0.3\",\"app-fqm-1.0.7\",\"app-marc-migrations-2.0.1\",\"app-oai-pmh-1.0.1\",\"app-platform-complete-2.1.27\",\"app-platform-minimal-2.0.14\",\"app-inn-reach-1.0.0\",\"app-linked-data-1.1.6\",\"app-requests-mediated-ui-1.1.2\",\"app-requests-mediated-2.0.0\",\"app-requests-ecs-1.1.0\"]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/entitlements?async=true&purgeOnRollback=false&ignoreErrors=false",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "entitlements"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "true"
+            },
+            {
+              "key": "purgeOnRollback",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "false"
+            },
+            {
+              "key": "tenantParameters",
+              "value": "loadReference%3Dfalse%2CloadSample%3Dfalse%2CcentralTenantId%3Dcs00000int",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Disable application for tenant",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "f3e4f8ca-d0fd-4bf0-9e7f-7850f8f3396b",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;",
+              "",
+              "",
+              "pm.sendRequest({",
+              "    url: keycloakUrl,",
+              "    method: 'POST',",
+              "    header: {",
+              "        'content-type': 'application/x-www-form-urlencoded'",
+              "    },",
+              "    body: {",
+              "        mode: 'urlencoded',",
+              "        urlencoded: [",
+              "            {key: 'grant_type', value: 'client_credentials'},",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}",
+              "        ]",
+              "    }",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "021ac695-912e-4b4c-95e0-251880b3be58",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"tenantId\": \"7d85d885-04d4-400e-b5a1-0601c1132452\",\n    \"applications\": [\"app-platform-complete-0.0.8\"]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/entitlements?async=true",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "entitlements"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get flow status",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "f3e4f8ca-d0fd-4bf0-9e7f-7850f8f3396b",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "3d5d394a-1aa7-4385-b05e-61192301af9a",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/entitlement-flows/:flow_di?includeStages=true",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "entitlement-flows",
+            ":flow_di"
+          ],
+          "query": [
+            {
+              "key": "includeStages",
+              "value": "true"
+            }
+          ],
+          "variable": [
+            {
+              "key": "flow_di",
+              "value": "6a27fc20-46cb-493d-84ba-b01c0152c856"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get entitlement flows",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "f3e4f8ca-d0fd-4bf0-9e7f-7850f8f3396b",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "c11a0016-9dd6-4551-85ea-4c8c07b82d04",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/entitlement-flows?limit=500",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "entitlement-flows"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get appications",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "441cebd7-a2fd-49b9-96e7-74aef1e63439",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "f6a5bcb7-381b-4f42-9462-f8cbb98013d8",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "a9a97ab1-ec11-48ab-9f32-c296b96ad0b9",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/applications?limit=300",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "applications"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "name={{realm}}",
+              "disabled": true
+            },
+            {
+              "key": "query",
+              "value": "id=app-platform-complete-2.1.5",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "300"
+            }
+          ]
+        },
+        "description": "### GET /applications\n\nThis endpoint retrieves a list of applications with an optional limit parameter to specify the maximum number of records to return.\n\n#### Request Parameters\n\n- `limit` (query parameter, optional): Specifies the maximum number of records to return.\n    \n\n#### Response\n\nUpon a successful execution, the server responds with a status code of 200 and a JSON object containing an array of `applicationDescriptors` and the `totalRecords` field. Each `applicationDescriptor` object includes:\n\n- `description`: The description of the application.\n    \n- `modules`: An array of objects, each containing the `id`, `name`, and `version` of a module.\n    \n- `uiModules`: An array of objects, each containing the `id`, `name`, and `version` of a UI module.\n    \n- `platform`: The platform of the application.\n    \n- `dependencies`: An array of objects, each containing the `name` and `version` of a dependency.\n    \n- `id`: The unique identifier of the application.\n    \n- `name`: The name of the application.\n    \n- `version`: The version of the application.\n    \n\nIf there are no records, the `totalRecords` field will be 0.\n\n#### Example\n\n``` json\n{\n    \"applicationDescriptors\": [\n        {\n            \"description\": \"\",\n            \"modules\": [\n                {\n                    \"id\": \"\",\n                    \"name\": \"\",\n                    \"version\": \"\"\n                }\n            ],\n            \"uiModules\": [\n                {\n                    \"id\": \"\",\n                    \"name\": \"\",\n                    \"version\": \"\"\n                }\n            ],\n            \"platform\": \"\",\n            \"dependencies\": [\n                {\n                    \"name\": \"\",\n                    \"version\": \"\"\n                }\n            ],\n            \"id\": \"\",\n            \"name\": \"\",\n            \"version\": \"\"\n        }\n    ],\n    \"totalRecords\": 0\n}\n\n ```"
+      },
+      "response": []
+    },
+    {
+      "name": "Get appication details",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "441cebd7-a2fd-49b9-96e7-74aef1e63439",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "f6a5bcb7-381b-4f42-9462-f8cbb98013d8",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "5fe375c1-f292-4589-ad4c-38f6d4b00def",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/applications/:app_id?full=true",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "applications",
+            ":app_id"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "name={{realm}}",
+              "disabled": true
+            },
+            {
+              "key": "query",
+              "value": "id=app-platform-complete-2.1.5",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "300",
+              "disabled": true
+            },
+            {
+              "key": "full",
+              "value": "true"
+            }
+          ],
+          "variable": [
+            {
+              "key": "app_id",
+              "value": "app-platform-complete-2.1.17"
+            }
+          ]
+        },
+        "description": "### GET /applications\n\nThis endpoint retrieves a list of applications with an optional limit parameter to specify the maximum number of records to return.\n\n#### Request Parameters\n\n- `limit` (query parameter, optional): Specifies the maximum number of records to return.\n    \n\n#### Response\n\nUpon a successful execution, the server responds with a status code of 200 and a JSON object containing an array of `applicationDescriptors` and the `totalRecords` field. Each `applicationDescriptor` object includes:\n\n- `description`: The description of the application.\n    \n- `modules`: An array of objects, each containing the `id`, `name`, and `version` of a module.\n    \n- `uiModules`: An array of objects, each containing the `id`, `name`, and `version` of a UI module.\n    \n- `platform`: The platform of the application.\n    \n- `dependencies`: An array of objects, each containing the `name` and `version` of a dependency.\n    \n- `id`: The unique identifier of the application.\n    \n- `name`: The name of the application.\n    \n- `version`: The version of the application.\n    \n\nIf there are no records, the `totalRecords` field will be 0.\n\n#### Example\n\n``` json\n{\n    \"applicationDescriptors\": [\n        {\n            \"description\": \"\",\n            \"modules\": [\n                {\n                    \"id\": \"\",\n                    \"name\": \"\",\n                    \"version\": \"\"\n                }\n            ],\n            \"uiModules\": [\n                {\n                    \"id\": \"\",\n                    \"name\": \"\",\n                    \"version\": \"\"\n                }\n            ],\n            \"platform\": \"\",\n            \"dependencies\": [\n                {\n                    \"name\": \"\",\n                    \"version\": \"\"\n                }\n            ],\n            \"id\": \"\",\n            \"name\": \"\",\n            \"version\": \"\"\n        }\n    ],\n    \"totalRecords\": 0\n}\n\n ```"
+      },
+      "response": []
+    },
+    {
+      "name": "Get deleted MARC",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "8b592a8f-c28e-4f65-afcb-7679b3ba04c4",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "c26fcf94-8ce6-44fd-ad42-e99144481d4c",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "62adbbb4-982a-457f-a3be-05ad110be1ae",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{tenant_id}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authority-storage/authorities?idOnly=true&deleted=true",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authority-storage",
+            "authorities"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "name={{realm}}",
+              "disabled": true
+            },
+            {
+              "key": "full",
+              "value": "true",
+              "disabled": true
+            },
+            {
+              "key": "idOnly",
+              "value": "true"
+            },
+            {
+              "key": "deleted",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validate applications",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "f3e4f8ca-d0fd-4bf0-9e7f-7850f8f3396b",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "8a2fd387-e9ff-4f7c-83ce-15f06bbb05d8",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "c28ff0ec-0427-496c-a6f5-eaba97e73b60",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"tenantId\": \"499fd5cb-e4bc-426e-a244-d80dc6a0cf7e\",\n    \"applications\": [\"app-platform-minimal-0.0.8\"]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/applications/validate",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "applications",
+            "validate"
+          ],
+          "query": [
+            {
+              "key": "full",
+              "value": "true",
+              "description": "if true - modules descriptors will be added",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "500",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DEBUG",
+      "id": "07a3e94f-3ed0-4df7-a5a4-fbea4060e50c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3c24wTE0wUS1mdXNPbXE4LUpSbkFIemtRc1BNOXN6MFEySXpjQUtQR2FRIn0.eyJleHAiOjE3MDg1MjUzODksImlhdCI6MTcwODUyNTMyOSwianRpIjoiYTlkYThjMjUtNTFiNC00YWNiLThiMmMtMWM0NmM5YmNlZTExIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1ldnJrdWkuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL21hc3RlciIsImF1ZCI6WyJ1aXRlc3QwMDItcmVhbG0iLCJjc2V2cmswMDItcmVhbG0iLCJ1aXRlc3QwMDEtcmVhbG0iLCJtYXN0ZXItcmVhbG0iLCJ1aXRlc3QwMDMtcmVhbG0iLCJjc2V2cmswMDEtcmVhbG0iLCJhY2NvdW50Il0sInN1YiI6IjM4MDEyYjAxLTI3ZjItNGE2YS1hYTk3LTBjYzQ4YzFiOWFlMyIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZvbGlvLWJhY2tlbmQtYWRtaW4tY2xpZW50IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW1hc3RlciIsIk1hbmFnZXIgVGVuYW50cyAtIFJlYWQgb25seSBwZXJtaXNzaW9ucyIsIk1hbmFnZXIgVGVuYW50IEVudGl0bGVtZW50cyAtIE1hbmFnZSB0ZW5hbnQgZW50aXRsZW1lbnRzIiwiTWFuYWdlciBBcHBsaWNhdGlvbnMgLSBNYW5hZ2UgYXBwbGljYXRpb25zIiwiYWRtaW4iLCJNYW5hZ2VyIFRlbmFudHMgLSBNYW5hZ2UgdGVuYW50cyIsImNyZWF0ZS1yZWFsbSIsIk1hbmFnZXIgQXBwbGljYXRpb25zIC0gTWFuYWdlIG1vZHVsZSBkaXNjb3ZlcmllcyIsIk1hbmFnZXIgVGVuYW50IEVudGl0bGVtZW50cyAtIEFsbCBwZXJtaXNzaW9ucyIsIk1hbmFnZXIgVGVuYW50cyAtIE1hbmFnZSB0ZW5hbnQgYXR0cmlidXRlcyIsIk1hbmFnZXIgVGVuYW50IEVudGl0bGVtZW50cyAtIE1hbmFnZSBlbnRpdGxlbWVudCBmbG93cyIsIm9mZmxpbmVfYWNjZXNzIiwiTWFuYWdlciBBcHBsaWNhdGlvbnMgLSBSZWFkIG9ubHkgcGVybWlzc2lvbnMiLCJNYW5hZ2VyIEFwcGxpY2F0aW9ucyAtIEFsbCBwZXJtaXNzaW9ucyIsIk1hbmFnZXIgVGVuYW50IEVudGl0bGVtZW50cyAtIFJlYWQgb25seSBwZXJtaXNzaW9ucyIsIk1hbmFnZXIgVGVuYW50cyAtIEFsbCBwZXJtaXNzaW9ucyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsidWl0ZXN0MDAyLXJlYWxtIjp7InJvbGVzIjpbInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwidmlldy1yZWFsbSIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJjc2V2cmswMDItcmVhbG0iOnsicm9sZXMiOlsidmlldy1yZWFsbSIsInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sInVpdGVzdDAwMS1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwibWFzdGVyLXJlYWxtIjp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJ1aXRlc3QwMDMtcmVhbG0iOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImNzZXZyazAwMS1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiY2xpZW50SG9zdCI6IjkzLjE3NS4yMDAuMTY2IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtZm9saW8tYmFja2VuZC1hZG1pbi1jbGllbnQiLCJjbGllbnRBZGRyZXNzIjoiOTMuMTc1LjIwMC4xNjYiLCJjbGllbnRfaWQiOiJmb2xpby1iYWNrZW5kLWFkbWluLWNsaWVudCJ9.eD9YMoGi23s5uPNhhSK6CSLt6HHnUw3pz3mEgm5baMwxOQ0lh20EQvIQ_3HCwTtZ27Sv67lEg_218FPuYeVGHSabJO2DRUaY3eN8eKheOeaUJLRUWn9Jrpe2ySrCJ5xsXm4xjFMnkfjV_Uxih9G5rT4sMYUoujr6nC2oRLT-G2aRYJuRDPSUGieST1Odr4l-LX27F8tlT-xquksHF2CecQQ12Ka9vJrol8yZZW0y5duwhkrCT6ezoouDrO8dfhpFt5_HPGnvuGRmZXoKsI_CikKdgjClrar4ySs1pRCMka36y0m3zSgJ39091K-ZPxg9tfRlZgrO03Dp8o_J7Lt3vA",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}application-flows/e9e614c8-12bf-4404-a83e-0a17a3d3e1a6/stages",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}application-flows"
+          ],
+          "path": [
+            "e9e614c8-12bf-4404-a83e-0a17a3d3e1a6",
+            "stages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get tenant entitlement",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "475b9512-e1f8-4579-8cff-e63617aeed76",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "b16aea2e-6ac6-406b-b857-14ac40774169",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+              "\r",
+              "// // kong url\r",
+              "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+              "// pm.sendRequest({\r",
+              "//     url: kongUrl,\r",
+              "//     method: 'GET',\r",
+              "//     header: {\r",
+              "//         'content-type': 'application/x-www-form-urlencoded'\r",
+              "//     },\r",
+              "//     body: {\r",
+              "//         mode: 'none',\r",
+              "//     }\r",
+              "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "65729275-93b6-4d81-9257-b7be2eee3958",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/entitlements?limit=500",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "entitlements"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "tenantId=={{tenant_id}}",
+              "disabled": true
+            },
+            {
+              "key": "query",
+              "value": "tenantId=5c1cd503-1ab5-4f42-8d30-966a731e13fc",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get tenant entitlement modules",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "ccd5df06-078d-48a3-98c2-5f772d1e06a3",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+              "\r",
+              "// // kong url\r",
+              "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+              "// pm.sendRequest({\r",
+              "//     url: kongUrl,\r",
+              "//     method: 'GET',\r",
+              "//     header: {\r",
+              "//         'content-type': 'application/x-www-form-urlencoded'\r",
+              "//     },\r",
+              "//     body: {\r",
+              "//         mode: 'none',\r",
+              "//     }\r",
+              "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "8ca9bf49-8750-4e91-99de-27cadd4def31",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/entitlements?limit=500",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "entitlements"
+          ],
+          "query": [
+            {
+              "key": "query",
+              "value": "tenantId=={{tenant_id}}",
+              "disabled": true
+            },
+            {
+              "key": "query",
+              "value": "tenantId=ecfe0feb-b9a4-4db7-9a6e-b7504f3500c6",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get application by name",
+      "id": "e3cc10c3-c9f7-4cb6-8097-289316ba9912",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3c24wTE0wUS1mdXNPbXE4LUpSbkFIemtRc1BNOXN6MFEySXpjQUtQR2FRIn0.eyJleHAiOjE3MDg1MjU4MDEsImlhdCI6MTcwODUyNTc0MSwianRpIjoiZDk5Y2Q3MzAtNDhlOS00Njg5LTk4ZmUtZTZhYmI5MWFiYzQzIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1ldnJrdWkuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL21hc3RlciIsImF1ZCI6WyJjczAwNS1yZWFsbSIsInVpdGVzdDAwMi1yZWFsbSIsImNzZXZyazAwMi1yZWFsbSIsInVpdGVzdDAwMS1yZWFsbSIsIm1hc3Rlci1yZWFsbSIsInVpdGVzdDAwMy1yZWFsbSIsImNzZXZyazAwMS1yZWFsbSIsImFjY291bnQiXSwic3ViIjoiMzgwMTJiMDEtMjdmMi00YTZhLWFhOTctMGNjNDhjMWI5YWUzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZm9saW8tYmFja2VuZC1hZG1pbi1jbGllbnQiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwiTWFuYWdlciBUZW5hbnRzIC0gUmVhZCBvbmx5IHBlcm1pc3Npb25zIiwiTWFuYWdlciBUZW5hbnQgRW50aXRsZW1lbnRzIC0gTWFuYWdlIHRlbmFudCBlbnRpdGxlbWVudHMiLCJNYW5hZ2VyIEFwcGxpY2F0aW9ucyAtIE1hbmFnZSBhcHBsaWNhdGlvbnMiLCJhZG1pbiIsIk1hbmFnZXIgVGVuYW50cyAtIE1hbmFnZSB0ZW5hbnRzIiwiY3JlYXRlLXJlYWxtIiwiTWFuYWdlciBBcHBsaWNhdGlvbnMgLSBNYW5hZ2UgbW9kdWxlIGRpc2NvdmVyaWVzIiwiTWFuYWdlciBUZW5hbnQgRW50aXRsZW1lbnRzIC0gQWxsIHBlcm1pc3Npb25zIiwiTWFuYWdlciBUZW5hbnRzIC0gTWFuYWdlIHRlbmFudCBhdHRyaWJ1dGVzIiwiTWFuYWdlciBUZW5hbnQgRW50aXRsZW1lbnRzIC0gTWFuYWdlIGVudGl0bGVtZW50IGZsb3dzIiwib2ZmbGluZV9hY2Nlc3MiLCJNYW5hZ2VyIEFwcGxpY2F0aW9ucyAtIFJlYWQgb25seSBwZXJtaXNzaW9ucyIsIk1hbmFnZXIgQXBwbGljYXRpb25zIC0gQWxsIHBlcm1pc3Npb25zIiwiTWFuYWdlciBUZW5hbnQgRW50aXRsZW1lbnRzIC0gUmVhZCBvbmx5IHBlcm1pc3Npb25zIiwiTWFuYWdlciBUZW5hbnRzIC0gQWxsIHBlcm1pc3Npb25zIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJjczAwNS1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LXJlYWxtIiwidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwidWl0ZXN0MDAyLXJlYWxtIjp7InJvbGVzIjpbInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwidmlldy1yZWFsbSIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJjc2V2cmswMDItcmVhbG0iOnsicm9sZXMiOlsidmlldy1yZWFsbSIsInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sInVpdGVzdDAwMS1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwibWFzdGVyLXJlYWxtIjp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJ1aXRlc3QwMDMtcmVhbG0iOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImNzZXZyazAwMS1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiY2xpZW50SG9zdCI6IjkzLjE3NS4yMDAuMTY2IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtZm9saW8tYmFja2VuZC1hZG1pbi1jbGllbnQiLCJjbGllbnRBZGRyZXNzIjoiOTMuMTc1LjIwMC4xNjYiLCJjbGllbnRfaWQiOiJmb2xpby1iYWNrZW5kLWFkbWluLWNsaWVudCJ9.KljHPgsk8KuLCPTpu3yglU9VFELejbrkF0zZWeu1tBwl-rlaNJJ06gQY0Swf4yDklCrsl-CmSSQyfZ3UlSiKF-4WkOFre1Y6Kj9KadBZXUglauNSd_fEC6Bs7V76bAUTpSoUk9e9VvRHBlzhcCq4E9nKPzdmHb1G-zq1yyurNX3uDsoVUUla_ohYN00sLy8km89i-42bjTHB2twzbpTyLDIR7K0kaeUqQ3ZYaVoUzTXWdkiK3gs6yRHxyzpLG05M6j2JTvl-ztE9qNzv5IcKpg_8A8GbXh0Pcb8PgOY1lzaaIuecF2YXMadLz4eI9XnqsfxbEQ7-qCrBYIM0F6rUqQ",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tenantId\" : \"42571ecf-d955-42b5-b708-daec67cbe652\",\n  \"applications\" : [\"app-platform-minimal-0.0.6\"]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/applications/:app_id",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "applications",
+            ":app_id"
+          ],
+          "query": [
+            {
+              "key": "full",
+              "value": "true",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "300",
+              "disabled": true
+            }
+          ],
+          "variable": [
+            {
+              "key": "app_id",
+              "value": "app-platform-complete-3.1.0-SNAPSHOT.1439"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get locations",
+      "id": "baef72c9-f963-4e64-9097-2c378ea2c193",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3c24wTE0wUS1mdXNPbXE4LUpSbkFIemtRc1BNOXN6MFEySXpjQUtQR2FRIn0.eyJleHAiOjE3MDg1MjU4MDEsImlhdCI6MTcwODUyNTc0MSwianRpIjoiZDk5Y2Q3MzAtNDhlOS00Njg5LTk4ZmUtZTZhYmI5MWFiYzQzIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1ldnJrdWkuaW50LmF3cy5mb2xpby5vcmcvcmVhbG1zL21hc3RlciIsImF1ZCI6WyJjczAwNS1yZWFsbSIsInVpdGVzdDAwMi1yZWFsbSIsImNzZXZyazAwMi1yZWFsbSIsInVpdGVzdDAwMS1yZWFsbSIsIm1hc3Rlci1yZWFsbSIsInVpdGVzdDAwMy1yZWFsbSIsImNzZXZyazAwMS1yZWFsbSIsImFjY291bnQiXSwic3ViIjoiMzgwMTJiMDEtMjdmMi00YTZhLWFhOTctMGNjNDhjMWI5YWUzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZm9saW8tYmFja2VuZC1hZG1pbi1jbGllbnQiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwiTWFuYWdlciBUZW5hbnRzIC0gUmVhZCBvbmx5IHBlcm1pc3Npb25zIiwiTWFuYWdlciBUZW5hbnQgRW50aXRsZW1lbnRzIC0gTWFuYWdlIHRlbmFudCBlbnRpdGxlbWVudHMiLCJNYW5hZ2VyIEFwcGxpY2F0aW9ucyAtIE1hbmFnZSBhcHBsaWNhdGlvbnMiLCJhZG1pbiIsIk1hbmFnZXIgVGVuYW50cyAtIE1hbmFnZSB0ZW5hbnRzIiwiY3JlYXRlLXJlYWxtIiwiTWFuYWdlciBBcHBsaWNhdGlvbnMgLSBNYW5hZ2UgbW9kdWxlIGRpc2NvdmVyaWVzIiwiTWFuYWdlciBUZW5hbnQgRW50aXRsZW1lbnRzIC0gQWxsIHBlcm1pc3Npb25zIiwiTWFuYWdlciBUZW5hbnRzIC0gTWFuYWdlIHRlbmFudCBhdHRyaWJ1dGVzIiwiTWFuYWdlciBUZW5hbnQgRW50aXRsZW1lbnRzIC0gTWFuYWdlIGVudGl0bGVtZW50IGZsb3dzIiwib2ZmbGluZV9hY2Nlc3MiLCJNYW5hZ2VyIEFwcGxpY2F0aW9ucyAtIFJlYWQgb25seSBwZXJtaXNzaW9ucyIsIk1hbmFnZXIgQXBwbGljYXRpb25zIC0gQWxsIHBlcm1pc3Npb25zIiwiTWFuYWdlciBUZW5hbnQgRW50aXRsZW1lbnRzIC0gUmVhZCBvbmx5IHBlcm1pc3Npb25zIiwiTWFuYWdlciBUZW5hbnRzIC0gQWxsIHBlcm1pc3Npb25zIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJjczAwNS1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LXJlYWxtIiwidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwidWl0ZXN0MDAyLXJlYWxtIjp7InJvbGVzIjpbInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwidmlldy1yZWFsbSIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJjc2V2cmswMDItcmVhbG0iOnsicm9sZXMiOlsidmlldy1yZWFsbSIsInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sInVpdGVzdDAwMS1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwibWFzdGVyLXJlYWxtIjp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJ1aXRlc3QwMDMtcmVhbG0iOnsicm9sZXMiOlsidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJ2aWV3LXJlYWxtIiwibWFuYWdlLWlkZW50aXR5LXByb3ZpZGVycyIsImltcGVyc29uYXRpb24iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImNzZXZyazAwMS1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiY2xpZW50SG9zdCI6IjkzLjE3NS4yMDAuMTY2IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtZm9saW8tYmFja2VuZC1hZG1pbi1jbGllbnQiLCJjbGllbnRBZGRyZXNzIjoiOTMuMTc1LjIwMC4xNjYiLCJjbGllbnRfaWQiOiJmb2xpby1iYWNrZW5kLWFkbWluLWNsaWVudCJ9.KljHPgsk8KuLCPTpu3yglU9VFELejbrkF0zZWeu1tBwl-rlaNJJ06gQY0Swf4yDklCrsl-CmSSQyfZ3UlSiKF-4WkOFre1Y6Kj9KadBZXUglauNSd_fEC6Bs7V76bAUTpSoUk9e9VvRHBlzhcCq4E9nKPzdmHb1G-zq1yyurNX3uDsoVUUla_ohYN00sLy8km89i-42bjTHB2twzbpTyLDIR7K0kaeUqQ3ZYaVoUzTXWdkiK3gs6yRHxyzpLG05M6j2JTvl-ztE9qNzv5IcKpg_8A8GbXh0Pcb8PgOY1lzaaIuecF2YXMadLz4eI9XnqsfxbEQ7-qCrBYIM0F6rUqQ",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tenantId\" : \"42571ecf-d955-42b5-b708-daec67cbe652\",\n  \"applications\" : [\"app-platform-minimal-0.0.6\"]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/applications",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "applications"
+          ],
+          "query": [
+            {
+              "key": "full",
+              "value": "true",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get users capabilities",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "22af747f-a375-46ea-b6e7-4f18a06377c1",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;",
+              "",
+              "",
+              "pm.sendRequest({",
+              "    url: keycloakUrl,",
+              "    method: 'POST',",
+              "    header: {",
+              "        'content-type': 'application/x-www-form-urlencoded'",
+              "    },",
+              "    body: {",
+              "        mode: 'urlencoded',",
+              "        urlencoded: [",
+              "            {key: 'grant_type', value: 'client_credentials'},",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}",
+              "        ]",
+              "    }",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "6cf0dcdc-7632-4307-bc59-070fc07421f0",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "1b687aa3-c66b-4a79-8f8f-c3fa9d1b1764",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/roles",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "roles"
+          ],
+          "query": [
+            {
+              "key": "full",
+              "value": "true",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create eureka tenant",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "76a3b963-759c-473e-bfb9-92a40af5bbf6",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "b0856c5d-6a3e-4667-a846-104cb1021db3",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\" : \"tenant1\",\n    \"description\" : \"tenant1\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/tenants",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "tenants"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete tenant entitlements",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "8dc5ca87-70fd-4e34-82bd-ae9fb13f1df1",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;",
+              "",
+              "",
+              "pm.sendRequest({",
+              "    url: keycloakUrl,",
+              "    method: 'POST',",
+              "    header: {",
+              "        'content-type': 'application/x-www-form-urlencoded'",
+              "    },",
+              "    body: {",
+              "        mode: 'urlencoded',",
+              "        urlencoded: [",
+              "            {key: 'grant_type', value: 'client_credentials'},",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}",
+              "        ]",
+              "    }",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "d065bf96-f7d7-4346-addd-abf3ec348602",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tenantId\" : \"d70f920c-7d5c-4161-a0f4-0eb96b143aa2\",\n  \"applications\" : [\"app-acquisitions-1.2.0-SNAPSHOT.1090\",\"app-platform-complete-3.0.1-SNAPSHOT.1152\",\"app-platform-minimal-2.1.0-SNAPSHOT.1069\"]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/entitlements?async=true",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "entitlements"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register application",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "5b848f77-540e-4e59-8328-0f4157343d4f",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"app-platform-complete-0.0.8-SNAPSHOT.01\",\n  \"name\": \"app-platform-complete\",\n  \"version\": \"0.0.8-SNAPSHOT.01\",\n  \"description\": \"Complete application with all modules for Poppy-SP1\",\n  \"platform\": \"complete\",\n  \"dependencies\": [\n    {\n      \"name\": \"app-platform-minimal\",\n      \"version\": \"^0.0.11-SNAPSHOT.01\"\n    }\n  ],\n  \"modules\": [\n    {\n      \"id\": \"mod-organizations-1.8.0\",\n      \"name\": \"mod-organizations\",\n      \"version\": \"1.8.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-organizations-1.8.0\"\n    },\n    {\n      \"id\": \"mod-graphql-1.12.1\",\n      \"name\": \"mod-graphql\",\n      \"version\": \"1.12.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-graphql-1.12.1\"\n    },\n    {\n      \"id\": \"mod-consortia-keycloak-1.1.1\",\n      \"name\": \"mod-consortia-keycloak\",\n      \"version\": \"1.1.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-consortia-keycloak-1.1.1\"\n    },\n    {\n      \"id\": \"mod-organizations-storage-4.6.0\",\n      \"name\": \"mod-organizations-storage\",\n      \"version\": \"4.6.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-organizations-storage-4.6.0\"\n    },\n    {\n      \"id\": \"mod-orders-12.7.1\",\n      \"name\": \"mod-orders\",\n      \"version\": \"12.7.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-orders-12.7.1\"\n    },\n    {\n      \"id\": \"mod-orders-storage-13.6.0\",\n      \"name\": \"mod-orders-storage\",\n      \"version\": \"13.6.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-orders-storage-13.6.0\"\n    },\n    {\n      \"id\": \"mod-invoice-5.7.2\",\n      \"name\": \"mod-invoice\",\n      \"version\": \"5.7.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-invoice-5.7.2\"\n    },\n    {\n      \"id\": \"mod-invoice-storage-5.7.0\",\n      \"name\": \"mod-invoice-storage\",\n      \"version\": \"5.7.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-invoice-storage-5.7.0\"\n    },\n    {\n      \"id\": \"mod-finance-storage-8.5.0\",\n      \"name\": \"mod-finance-storage\",\n      \"version\": \"8.5.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-finance-storage-8.5.0\"\n    },\n    {\n      \"id\": \"mod-finance-4.8.0\",\n      \"name\": \"mod-finance\",\n      \"version\": \"4.8.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-finance-4.8.0\"\n    },\n    {\n      \"id\": \"mod-quick-marc-5.0.1\",\n      \"name\": \"mod-quick-marc\",\n      \"version\": \"5.0.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-quick-marc-5.0.1\"\n    },\n    {\n      \"id\": \"mod-inventory-storage-27.0.4\",\n      \"name\": \"mod-inventory-storage\",\n      \"version\": \"27.0.4\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-inventory-storage-27.0.4\"\n    },\n    {\n      \"id\": \"mod-circulation-storage-17.1.7\",\n      \"name\": \"mod-circulation-storage\",\n      \"version\": \"17.1.7\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-circulation-storage-17.1.7\"\n    },\n    {\n      \"id\": \"mod-search-3.1.0\",\n      \"name\": \"mod-search\",\n      \"version\": \"3.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-search-3.1.0\"\n    },\n    {\n      \"id\": \"mod-inventory-20.1.8\",\n      \"name\": \"mod-inventory\",\n      \"version\": \"20.1.8\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-inventory-20.1.8\"\n    },\n    {\n      \"id\": \"mod-circulation-24.1.0\",\n      \"name\": \"mod-circulation\",\n      \"version\": \"24.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-circulation-24.1.0\"\n    },\n    {\n      \"id\": \"mod-feesfines-19.0.0\",\n      \"name\": \"mod-feesfines\",\n      \"version\": \"19.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-feesfines-19.0.0\"\n    },\n    {\n      \"id\": \"mod-patron-blocks-1.9.0\",\n      \"name\": \"mod-patron-blocks\",\n      \"version\": \"1.9.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-patron-blocks-1.9.0\"\n    },\n    {\n      \"id\": \"mod-entities-links-2.1.0\",\n      \"name\": \"mod-entities-links\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-entities-links-2.1.0\"\n    },\n    {\n      \"id\": \"mod-source-record-manager-3.7.9\",\n      \"name\": \"mod-source-record-manager\",\n      \"version\": \"3.7.9\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-source-record-manager-3.7.9\"\n    },\n    {\n      \"id\": \"mod-di-converter-storage-2.1.6\",\n      \"name\": \"mod-di-converter-storage\",\n      \"version\": \"2.1.6\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-di-converter-storage-2.1.6\"\n    },\n    {\n      \"id\": \"mod-patron-6.0.0\",\n      \"name\": \"mod-patron\",\n      \"version\": \"6.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-patron-6.0.0\"\n    },\n    {\n      \"id\": \"mod-data-export-4.8.7\",\n      \"name\": \"mod-data-export\",\n      \"version\": \"4.8.7\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-data-export-4.8.7\"\n    },\n    {\n      \"id\": \"mod-data-export-spring-3.1.0\",\n      \"name\": \"mod-data-export-spring\",\n      \"version\": \"3.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-data-export-spring-3.1.0\"\n    },\n    {\n      \"id\": \"mod-data-export-worker-3.1.2\",\n      \"name\": \"mod-data-export-worker\",\n      \"version\": \"3.1.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-data-export-worker-3.1.2\"\n    },\n    {\n      \"id\": \"mod-bulk-operations-1.1.9\",\n      \"name\": \"mod-bulk-operations\",\n      \"version\": \"1.1.9\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-bulk-operations-1.1.9\"\n    },\n    {\n      \"id\": \"mod-oai-pmh-3.12.8\",\n      \"name\": \"mod-oai-pmh\",\n      \"version\": \"3.12.8\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-oai-pmh-3.12.8\"\n    },\n    {\n      \"id\": \"mod-rtac-3.5.0\",\n      \"name\": \"mod-rtac\",\n      \"version\": \"3.5.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-rtac-3.5.0\"\n    },\n    {\n      \"id\": \"mod-remote-storage-3.1.0\",\n      \"name\": \"mod-remote-storage\",\n      \"version\": \"3.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-remote-storage-3.1.0\"\n    },\n    {\n      \"id\": \"mod-calendar-2.5.0\",\n      \"name\": \"mod-calendar\",\n      \"version\": \"2.5.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-calendar-2.5.0\"\n    },\n    {\n      \"id\": \"mod-audit-2.8.0\",\n      \"name\": \"mod-audit\",\n      \"version\": \"2.8.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-audit-2.8.0\"\n    },\n    {\n      \"id\": \"mod-courses-1.4.8\",\n      \"name\": \"mod-courses\",\n      \"version\": \"1.4.8\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-courses-1.4.8\"\n    },\n    {\n      \"id\": \"mod-source-record-storage-5.7.6\",\n      \"name\": \"mod-source-record-storage\",\n      \"version\": \"5.7.6\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-source-record-storage-5.7.6\"\n    },\n    {\n      \"id\": \"mod-data-import-3.0.7\",\n      \"name\": \"mod-data-import\",\n      \"version\": \"3.0.7\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-data-import-3.0.7\"\n    },\n    {\n      \"id\": \"mod-agreements-6.0.2\",\n      \"name\": \"mod-agreements\",\n      \"version\": \"6.0.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-agreements-6.0.2\"\n    },\n    {\n      \"id\": \"mod-licenses-5.0.2\",\n      \"name\": \"mod-licenses\",\n      \"version\": \"5.0.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-licenses-5.0.2\"\n    },\n    {\n      \"id\": \"mod-email-1.16.0\",\n      \"name\": \"mod-email\",\n      \"version\": \"1.16.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-email-1.16.0\"\n    },\n    {\n      \"id\": \"mod-event-config-2.6.0\",\n      \"name\": \"mod-event-config\",\n      \"version\": \"2.6.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-event-config-2.6.0\"\n    },\n    {\n      \"id\": \"mod-notify-3.1.0\",\n      \"name\": \"mod-notify\",\n      \"version\": \"3.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-notify-3.1.0\"\n    },\n    {\n      \"id\": \"mod-sender-1.11.0\",\n      \"name\": \"mod-sender\",\n      \"version\": \"1.11.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-sender-1.11.0\"\n    },\n    {\n      \"id\": \"mod-template-engine-1.19.1\",\n      \"name\": \"mod-template-engine\",\n      \"version\": \"1.19.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-template-engine-1.19.1\"\n    },\n    {\n      \"id\": \"mod-pubsub-2.12.0\",\n      \"name\": \"mod-pubsub\",\n      \"version\": \"2.12.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-pubsub-2.12.0\"\n    },\n    {\n      \"id\": \"mod-gobi-2.7.1\",\n      \"name\": \"mod-gobi\",\n      \"version\": \"2.7.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-gobi-2.7.1\"\n    },\n    {\n      \"id\": \"mod-copycat-1.5.0\",\n      \"name\": \"mod-copycat\",\n      \"version\": \"1.5.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-copycat-1.5.0\"\n    },\n    {\n      \"id\": \"mod-kb-ebsco-java-4.0.0\",\n      \"name\": \"mod-kb-ebsco-java\",\n      \"version\": \"4.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-kb-ebsco-java-4.0.0\"\n    },\n    {\n      \"id\": \"mod-ncip-1.14.4\",\n      \"name\": \"mod-ncip\",\n      \"version\": \"1.14.4\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-ncip-1.14.4\"\n    },\n    {\n      \"id\": \"mod-inventory-update-3.2.1\",\n      \"name\": \"mod-inventory-update\",\n      \"version\": \"3.2.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-inventory-update-3.2.1\"\n    },\n    {\n      \"id\": \"mod-user-import-3.8.0\",\n      \"name\": \"mod-user-import\",\n      \"version\": \"3.8.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-user-import-3.8.0\"\n    },\n    {\n      \"id\": \"mod-service-interaction-3.0.3\",\n      \"name\": \"mod-service-interaction\",\n      \"version\": \"3.0.3\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-service-interaction-3.0.3\"\n    },\n    {\n      \"id\": \"mod-ebsconet-2.1.1\",\n      \"name\": \"mod-ebsconet\",\n      \"version\": \"2.1.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-ebsconet-2.1.1\"\n    },\n    {\n      \"id\": \"mod-fqm-manager-1.0.3\",\n      \"name\": \"mod-fqm-manager\",\n      \"version\": \"1.0.3\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-fqm-manager-1.0.3\"\n    },\n    {\n      \"id\": \"mod-lists-1.0.5\",\n      \"name\": \"mod-lists\",\n      \"version\": \"1.0.5\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/mod-lists-1.0.5\"\n    }\n  ],\n  \"uiModules\": [\n    {\n      \"id\": \"folio_organizations-5.0.0\",\n      \"name\": \"folio_organizations\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_organizations-5.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-organization-5.0.0\",\n      \"name\": \"folio_plugin-find-organization\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-organization-5.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-contact-5.0.0\",\n      \"name\": \"folio_plugin-find-contact\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-contact-5.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-interface-5.0.0\",\n      \"name\": \"folio_plugin-find-interface\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-interface-5.0.0\"\n    },\n    {\n      \"id\": \"folio_invoice-5.0.2\",\n      \"name\": \"folio_invoice\",\n      \"version\": \"5.0.2\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_invoice-5.0.2\"\n    },\n    {\n      \"id\": \"folio_finance-5.0.0\",\n      \"name\": \"folio_finance\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_finance-5.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-fund-3.0.0\",\n      \"name\": \"folio_plugin-find-fund\",\n      \"version\": \"3.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-fund-3.0.0\"\n    },\n    {\n      \"id\": \"folio_orders-5.0.2\",\n      \"name\": \"folio_orders\",\n      \"version\": \"5.0.2\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_orders-5.0.2\"\n    },\n    {\n      \"id\": \"folio_receiving-4.0.0\",\n      \"name\": \"folio_receiving\",\n      \"version\": \"4.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_receiving-4.0.0\"\n    },\n    {\n      \"id\": \"folio_acquisition-units-5.0.0\",\n      \"name\": \"folio_acquisition-units\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_acquisition-units-5.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-po-line-5.0.0\",\n      \"name\": \"folio_plugin-find-po-line\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-po-line-5.0.0\"\n    },\n    {\n      \"id\": \"folio_marc-authorities-4.0.1\",\n      \"name\": \"folio_marc-authorities\",\n      \"version\": \"4.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_marc-authorities-4.0.1\"\n    },\n    {\n      \"id\": \"folio_stripes-authority-components-3.0.2\",\n      \"name\": \"folio_stripes-authority-components\",\n      \"version\": \"3.0.2\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_stripes-authority-components-3.0.2\"\n    },\n    {\n      \"id\": \"folio_quick-marc-7.0.5\",\n      \"name\": \"folio_quick-marc\",\n      \"version\": \"7.0.5\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_quick-marc-7.0.5\"\n    },\n    {\n      \"id\": \"folio_inventory-10.0.10\",\n      \"name\": \"folio_inventory\",\n      \"version\": \"10.0.10\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_inventory-10.0.10\"\n    },\n    {\n      \"id\": \"folio_servicepoints-7.0.0\",\n      \"name\": \"folio_servicepoints\",\n      \"version\": \"7.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_servicepoints-7.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-create-inventory-records-4.0.0\",\n      \"name\": \"folio_plugin-create-inventory-records\",\n      \"version\": \"4.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-create-inventory-records-4.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-instance-7.0.4\",\n      \"name\": \"folio_plugin-find-instance\",\n      \"version\": \"7.0.4\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-instance-7.0.4\"\n    },\n    {\n      \"id\": \"folio_plugin-find-package-title-6.0.0\",\n      \"name\": \"folio_plugin-find-package-title\",\n      \"version\": \"6.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-package-title-6.0.0\"\n    },\n    {\n      \"id\": \"folio_checkin-9.0.1\",\n      \"name\": \"folio_checkin\",\n      \"version\": \"9.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_checkin-9.0.1\"\n    },\n    {\n      \"id\": \"folio_checkout-10.0.1\",\n      \"name\": \"folio_checkout\",\n      \"version\": \"10.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_checkout-10.0.1\"\n    },\n    {\n      \"id\": \"folio_circulation-9.0.3\",\n      \"name\": \"folio_circulation\",\n      \"version\": \"9.0.3\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_circulation-9.0.3\"\n    },\n    {\n      \"id\": \"folio_plugin-find-user-7.0.0\",\n      \"name\": \"folio_plugin-find-user\",\n      \"version\": \"7.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-user-7.0.0\"\n    },\n    {\n      \"id\": \"folio_data-export-6.0.0\",\n      \"name\": \"folio_data-export\",\n      \"version\": \"6.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_data-export-6.0.0\"\n    },\n    {\n      \"id\": \"folio_export-manager-3.0.0\",\n      \"name\": \"folio_export-manager\",\n      \"version\": \"3.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_export-manager-3.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-bursar-export-3.0.0\",\n      \"name\": \"folio_plugin-bursar-export\",\n      \"version\": \"3.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-bursar-export-3.0.0\"\n    },\n    {\n      \"id\": \"folio_bulk-edit-4.0.2\",\n      \"name\": \"folio_bulk-edit\",\n      \"version\": \"4.0.2\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_bulk-edit-4.0.2\"\n    },\n    {\n      \"id\": \"folio_oai-pmh-5.0.0\",\n      \"name\": \"folio_oai-pmh\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_oai-pmh-5.0.0\"\n    },\n    {\n      \"id\": \"folio_remote-storage-5.0.0\",\n      \"name\": \"folio_remote-storage\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_remote-storage-5.0.0\"\n    },\n    {\n      \"id\": \"folio_circulation-log-4.0.1\",\n      \"name\": \"folio_circulation-log\",\n      \"version\": \"4.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_circulation-log-4.0.1\"\n    },\n    {\n      \"id\": \"folio_calendar-10.0.1\",\n      \"name\": \"folio_calendar\",\n      \"version\": \"10.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_calendar-10.0.1\"\n    },\n    {\n      \"id\": \"folio_courses-6.0.3\",\n      \"name\": \"folio_courses\",\n      \"version\": \"6.0.3\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_courses-6.0.3\"\n    },\n    {\n      \"id\": \"folio_requests-9.0.1\",\n      \"name\": \"folio_requests\",\n      \"version\": \"9.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_requests-9.0.1\"\n    },\n    {\n      \"id\": \"folio_data-import-7.0.5\",\n      \"name\": \"folio_data-import\",\n      \"version\": \"7.0.5\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_data-import-7.0.5\"\n    },\n    {\n      \"id\": \"folio_plugin-find-import-profile-7.0.0\",\n      \"name\": \"folio_plugin-find-import-profile\",\n      \"version\": \"7.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-import-profile-7.0.0\"\n    },\n    {\n      \"id\": \"folio_agreements-10.0.1\",\n      \"name\": \"folio_agreements\",\n      \"version\": \"10.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_agreements-10.0.1\"\n    },\n    {\n      \"id\": \"folio_plugin-find-agreement-10.0.0\",\n      \"name\": \"folio_plugin-find-agreement\",\n      \"version\": \"10.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-agreement-10.0.0\"\n    },\n    {\n      \"id\": \"folio_eholdings-9.0.2\",\n      \"name\": \"folio_eholdings\",\n      \"version\": \"9.0.2\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_eholdings-9.0.2\"\n    },\n    {\n      \"id\": \"folio_licenses-10.0.0\",\n      \"name\": \"folio_licenses\",\n      \"version\": \"10.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_licenses-10.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-license-10.0.0\",\n      \"name\": \"folio_plugin-find-license\",\n      \"version\": \"10.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-license-10.0.0\"\n    },\n    {\n      \"id\": \"folio_local-kb-admin-7.0.0\",\n      \"name\": \"folio_local-kb-admin\",\n      \"version\": \"7.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_local-kb-admin-7.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-eresource-6.0.1\",\n      \"name\": \"folio_plugin-find-eresource\",\n      \"version\": \"6.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-eresource-6.0.1\"\n    },\n    {\n      \"id\": \"folio_dashboard-5.0.0\",\n      \"name\": \"folio_dashboard\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_dashboard-5.0.0\"\n    },\n    {\n      \"id\": \"folio_tenant-settings-8.0.0\",\n      \"name\": \"folio_tenant-settings\",\n      \"version\": \"8.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/folio_tenant-settings-8.0.0\"\n    },\n    {\n      \"id\": \"folio_gobi-settings-3.0.0\",\n      \"name\": \"folio_gobi-settings\",\n      \"version\": \"3.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_gobi-settings-3.0.0\"\n    },\n    {\n      \"id\": \"folio_handler-stripes-registry-2.0.1\",\n      \"name\": \"folio_handler-stripes-registry\",\n      \"version\": \"2.0.1\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_handler-stripes-registry-2.0.1\"\n    },\n    {\n      \"id\": \"folio_myprofile-9.0.0\",\n      \"name\": \"folio_myprofile\",\n      \"version\": \"9.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_myprofile-9.0.0\"\n    },\n    {\n      \"id\": \"folio_plugin-find-authority-3.0.2\",\n      \"name\": \"folio_plugin-find-authority\",\n      \"version\": \"3.0.2\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-find-authority-3.0.2\"\n    },\n    {\n      \"id\": \"folio_plugin-query-builder-1.0.2\",\n      \"name\": \"folio_plugin-query-builder\",\n      \"version\": \"1.0.2\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_plugin-query-builder-1.0.2\"\n    },\n    {\n      \"id\": \"folio_service-interaction-2.0.0\",\n      \"name\": \"folio_service-interaction\",\n      \"version\": \"2.0.0\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_service-interaction-2.0.0\"\n    },\n    {\n      \"id\": \"folio_users-10.0.5\",\n      \"name\": \"folio_users\",\n      \"version\": \"10.0.5\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/folio_users-10.0.5\"\n    },\n    {\n      \"id\": \"folio_lists-2.0.6\",\n      \"name\": \"folio_lists\",\n      \"version\": \"2.0.6\",\n      \"url\": \"https://folio-registry.dev.folio.org/_/proxy/modules/folio_lists-2.0.6\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/applications?check=false",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "applications"
+          ],
+          "query": [
+            {
+              "key": "check",
+              "value": "false"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete application",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/master/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "149f80bf-fcf2-4f93-afa6-58f4f577e005",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/applications/:app_id",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "applications",
+            ":app_id"
+          ],
+          "variable": [
+            {
+              "key": "app_id",
+              "value": "app-platform-complete-3.0.1-SNAPSHOT.1086"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get app descriptor",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "25185568-cec1-44c1-a5bb-8c929d55b06d",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"app-test-0.0.1\",\n  \"name\": \"app-test\",\n  \"version\": \"0.0.1\",\n  \"description\": \"copule modules to test\",\n  \"platform\": \"complete\",\n  \"dependencies\": [\n    {\n      \"name\": \"app-platform-minimal\",\n      \"version\": \"0.0.6\"\n    }\n  ],\n  \"modules\": [\n    {\n      \"id\": \"mod-pubsub-2.11.2\",\n      \"name\": \"mod-pubsub\",\n      \"version\": \"2.11.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-pubsub-2.11.2\"\n    },\n    {\n      \"id\": \"mod-search-3.0.3\",\n      \"name\": \"mod-search\",\n      \"version\": \"3.0.3\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-search-3.0.3\"\n    },\n    {\n      \"id\": \"edge-orders-2.9.0\",\n      \"name\": \"edge-orders\",\n      \"version\": \"2.9.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-orders-2.9.0\"\n    },\n    {\n      \"id\": \"edge-connexion-1.1.0\",\n      \"name\": \"edge-connexion\",\n      \"version\": \"1.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-connexion-1.1.0\"\n    },\n    {\n      \"id\": \"edge-oai-pmh-2.7.0\",\n      \"name\": \"edge-oai-pmh\",\n      \"version\": \"2.7.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-oai-pmh-2.7.0\"\n    },\n    {\n      \"id\": \"edge-dematic-2.1.0\",\n      \"name\": \"edge-dematic\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-dematic-2.1.0\"\n    },\n    {\n      \"id\": \"edge-caiasoft-2.1.0\",\n      \"name\": \"edge-caiasoft\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-caiasoft-2.1.0\"\n    },\n    {\n      \"id\": \"edge-rtac-2.6.1\",\n      \"name\": \"edge-rtac\",\n      \"version\": \"2.6.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-rtac-2.6.1\"\n    },\n    {\n      \"id\": \"edge-sip2-3.1.1\",\n      \"name\": \"edge-sip2\",\n      \"version\": \"3.1.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-sip2-3.1.1\"\n    },\n    {\n      \"id\": \"edge-ncip-1.9.2\",\n      \"name\": \"edge-ncip\",\n      \"version\": \"1.9.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-ncip-1.9.2\"\n    },\n    {\n      \"id\": \"edge-fqm-1.0.1\",\n      \"name\": \"edge-fqm\",\n      \"version\": \"1.0.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-fqm-1.0.1\"\n    },\n    {\n      \"id\": \"edge-patron-5.0.0\",\n      \"name\": \"edge-patron\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-patron-5.0.0\"\n    },\n    {\n      \"id\": \"edge-courses-1.3.0\",\n      \"name\": \"edge-courses\",\n      \"version\": \"1.3.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-courses-1.3.0\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/applications/",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "applications",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get app app discovery",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "df3e076b-a942-4106-9d2a-9b2641a913d4",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"app-test-0.0.1\",\n  \"name\": \"app-test\",\n  \"version\": \"0.0.1\",\n  \"description\": \"copule modules to test\",\n  \"platform\": \"complete\",\n  \"dependencies\": [\n    {\n      \"name\": \"app-platform-minimal\",\n      \"version\": \"0.0.6\"\n    }\n  ],\n  \"modules\": [\n    {\n      \"id\": \"mod-pubsub-2.11.2\",\n      \"name\": \"mod-pubsub\",\n      \"version\": \"2.11.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-pubsub-2.11.2\"\n    },\n    {\n      \"id\": \"mod-search-3.0.3\",\n      \"name\": \"mod-search\",\n      \"version\": \"3.0.3\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-search-3.0.3\"\n    },\n    {\n      \"id\": \"edge-orders-2.9.0\",\n      \"name\": \"edge-orders\",\n      \"version\": \"2.9.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-orders-2.9.0\"\n    },\n    {\n      \"id\": \"edge-connexion-1.1.0\",\n      \"name\": \"edge-connexion\",\n      \"version\": \"1.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-connexion-1.1.0\"\n    },\n    {\n      \"id\": \"edge-oai-pmh-2.7.0\",\n      \"name\": \"edge-oai-pmh\",\n      \"version\": \"2.7.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-oai-pmh-2.7.0\"\n    },\n    {\n      \"id\": \"edge-dematic-2.1.0\",\n      \"name\": \"edge-dematic\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-dematic-2.1.0\"\n    },\n    {\n      \"id\": \"edge-caiasoft-2.1.0\",\n      \"name\": \"edge-caiasoft\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-caiasoft-2.1.0\"\n    },\n    {\n      \"id\": \"edge-rtac-2.6.1\",\n      \"name\": \"edge-rtac\",\n      \"version\": \"2.6.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-rtac-2.6.1\"\n    },\n    {\n      \"id\": \"edge-sip2-3.1.1\",\n      \"name\": \"edge-sip2\",\n      \"version\": \"3.1.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-sip2-3.1.1\"\n    },\n    {\n      \"id\": \"edge-ncip-1.9.2\",\n      \"name\": \"edge-ncip\",\n      \"version\": \"1.9.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-ncip-1.9.2\"\n    },\n    {\n      \"id\": \"edge-fqm-1.0.1\",\n      \"name\": \"edge-fqm\",\n      \"version\": \"1.0.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-fqm-1.0.1\"\n    },\n    {\n      \"id\": \"edge-patron-5.0.0\",\n      \"name\": \"edge-patron\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-patron-5.0.0\"\n    },\n    {\n      \"id\": \"edge-courses-1.3.0\",\n      \"name\": \"edge-courses\",\n      \"version\": \"1.3.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-courses-1.3.0\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/modules/discovery?limit=500",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "modules",
+            "discovery"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete modules discovery",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "d2f04457-401c-4e3e-b79f-583ad1634d83",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"app-test-0.0.1\",\n  \"name\": \"app-test\",\n  \"version\": \"0.0.1\",\n  \"description\": \"copule modules to test\",\n  \"platform\": \"complete\",\n  \"dependencies\": [\n    {\n      \"name\": \"app-platform-minimal\",\n      \"version\": \"0.0.6\"\n    }\n  ],\n  \"modules\": [\n    {\n      \"id\": \"mod-pubsub-2.11.2\",\n      \"name\": \"mod-pubsub\",\n      \"version\": \"2.11.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-pubsub-2.11.2\"\n    },\n    {\n      \"id\": \"mod-search-3.0.3\",\n      \"name\": \"mod-search\",\n      \"version\": \"3.0.3\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-search-3.0.3\"\n    },\n    {\n      \"id\": \"edge-orders-2.9.0\",\n      \"name\": \"edge-orders\",\n      \"version\": \"2.9.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-orders-2.9.0\"\n    },\n    {\n      \"id\": \"edge-connexion-1.1.0\",\n      \"name\": \"edge-connexion\",\n      \"version\": \"1.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-connexion-1.1.0\"\n    },\n    {\n      \"id\": \"edge-oai-pmh-2.7.0\",\n      \"name\": \"edge-oai-pmh\",\n      \"version\": \"2.7.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-oai-pmh-2.7.0\"\n    },\n    {\n      \"id\": \"edge-dematic-2.1.0\",\n      \"name\": \"edge-dematic\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-dematic-2.1.0\"\n    },\n    {\n      \"id\": \"edge-caiasoft-2.1.0\",\n      \"name\": \"edge-caiasoft\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-caiasoft-2.1.0\"\n    },\n    {\n      \"id\": \"edge-rtac-2.6.1\",\n      \"name\": \"edge-rtac\",\n      \"version\": \"2.6.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-rtac-2.6.1\"\n    },\n    {\n      \"id\": \"edge-sip2-3.1.1\",\n      \"name\": \"edge-sip2\",\n      \"version\": \"3.1.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-sip2-3.1.1\"\n    },\n    {\n      \"id\": \"edge-ncip-1.9.2\",\n      \"name\": \"edge-ncip\",\n      \"version\": \"1.9.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-ncip-1.9.2\"\n    },\n    {\n      \"id\": \"edge-fqm-1.0.1\",\n      \"name\": \"edge-fqm\",\n      \"version\": \"1.0.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-fqm-1.0.1\"\n    },\n    {\n      \"id\": \"edge-patron-5.0.0\",\n      \"name\": \"edge-patron\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-patron-5.0.0\"\n    },\n    {\n      \"id\": \"edge-courses-1.3.0\",\n      \"name\": \"edge-courses\",\n      \"version\": \"1.3.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-courses-1.3.0\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/modules/discovery?limit=500",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "modules",
+            "discovery"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Re-create app discovery",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "aa690466-c7cb-4692-b3dd-ed5c6301c794",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"app-test-0.0.1\",\n  \"name\": \"app-test\",\n  \"version\": \"0.0.1\",\n  \"description\": \"copule modules to test\",\n  \"platform\": \"complete\",\n  \"dependencies\": [\n    {\n      \"name\": \"app-platform-minimal\",\n      \"version\": \"0.0.6\"\n    }\n  ],\n  \"modules\": [\n    {\n      \"id\": \"mod-pubsub-2.11.2\",\n      \"name\": \"mod-pubsub\",\n      \"version\": \"2.11.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-pubsub-2.11.2\"\n    },\n    {\n      \"id\": \"mod-search-3.0.3\",\n      \"name\": \"mod-search\",\n      \"version\": \"3.0.3\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-search-3.0.3\"\n    },\n    {\n      \"id\": \"edge-orders-2.9.0\",\n      \"name\": \"edge-orders\",\n      \"version\": \"2.9.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-orders-2.9.0\"\n    },\n    {\n      \"id\": \"edge-connexion-1.1.0\",\n      \"name\": \"edge-connexion\",\n      \"version\": \"1.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-connexion-1.1.0\"\n    },\n    {\n      \"id\": \"edge-oai-pmh-2.7.0\",\n      \"name\": \"edge-oai-pmh\",\n      \"version\": \"2.7.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-oai-pmh-2.7.0\"\n    },\n    {\n      \"id\": \"edge-dematic-2.1.0\",\n      \"name\": \"edge-dematic\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-dematic-2.1.0\"\n    },\n    {\n      \"id\": \"edge-caiasoft-2.1.0\",\n      \"name\": \"edge-caiasoft\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-caiasoft-2.1.0\"\n    },\n    {\n      \"id\": \"edge-rtac-2.6.1\",\n      \"name\": \"edge-rtac\",\n      \"version\": \"2.6.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-rtac-2.6.1\"\n    },\n    {\n      \"id\": \"edge-sip2-3.1.1\",\n      \"name\": \"edge-sip2\",\n      \"version\": \"3.1.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-sip2-3.1.1\"\n    },\n    {\n      \"id\": \"edge-ncip-1.9.2\",\n      \"name\": \"edge-ncip\",\n      \"version\": \"1.9.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-ncip-1.9.2\"\n    },\n    {\n      \"id\": \"edge-fqm-1.0.1\",\n      \"name\": \"edge-fqm\",\n      \"version\": \"1.0.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-fqm-1.0.1\"\n    },\n    {\n      \"id\": \"edge-patron-5.0.0\",\n      \"name\": \"edge-patron\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-patron-5.0.0\"\n    },\n    {\n      \"id\": \"edge-courses-1.3.0\",\n      \"name\": \"edge-courses\",\n      \"version\": \"1.3.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-courses-1.3.0\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/modules/discovery?limit=500",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "modules",
+            "discovery"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register module discovery",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('master_realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: 'folio-backend-admin-client'},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "bd825c02-498a-4aa7-9510-8e346568ee16",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n      \"location\": \"http://mod-calendar-b.sebf.folio-eis.us-west-2:8051/mod-calendar\",\n      \"id\": \"mod-calendar-3.3.1\",\n      \"name\": \"mod-calendar\",\n      \"version\": \"3.3.1\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/modules/:moduleId/discovery",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "modules",
+            ":moduleId",
+            "discovery"
+          ],
+          "variable": [
+            {
+              "key": "moduleId",
+              "value": "mod-calendar-3.3.1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get roles migration status",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('admin_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('admin_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "fae2bc48-3df2-4192-a9a4-ad827268a521",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"app-test-0.0.1\",\n  \"name\": \"app-test\",\n  \"version\": \"0.0.1\",\n  \"description\": \"copule modules to test\",\n  \"platform\": \"complete\",\n  \"dependencies\": [\n    {\n      \"name\": \"app-platform-minimal\",\n      \"version\": \"0.0.6\"\n    }\n  ],\n  \"modules\": [\n    {\n      \"id\": \"mod-pubsub-2.11.2\",\n      \"name\": \"mod-pubsub\",\n      \"version\": \"2.11.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-pubsub-2.11.2\"\n    },\n    {\n      \"id\": \"mod-search-3.0.3\",\n      \"name\": \"mod-search\",\n      \"version\": \"3.0.3\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/eureka/mod-search-3.0.3\"\n    },\n    {\n      \"id\": \"edge-orders-2.9.0\",\n      \"name\": \"edge-orders\",\n      \"version\": \"2.9.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-orders-2.9.0\"\n    },\n    {\n      \"id\": \"edge-connexion-1.1.0\",\n      \"name\": \"edge-connexion\",\n      \"version\": \"1.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-connexion-1.1.0\"\n    },\n    {\n      \"id\": \"edge-oai-pmh-2.7.0\",\n      \"name\": \"edge-oai-pmh\",\n      \"version\": \"2.7.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-oai-pmh-2.7.0\"\n    },\n    {\n      \"id\": \"edge-dematic-2.1.0\",\n      \"name\": \"edge-dematic\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-dematic-2.1.0\"\n    },\n    {\n      \"id\": \"edge-caiasoft-2.1.0\",\n      \"name\": \"edge-caiasoft\",\n      \"version\": \"2.1.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-caiasoft-2.1.0\"\n    },\n    {\n      \"id\": \"edge-rtac-2.6.1\",\n      \"name\": \"edge-rtac\",\n      \"version\": \"2.6.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-rtac-2.6.1\"\n    },\n    {\n      \"id\": \"edge-sip2-3.1.1\",\n      \"name\": \"edge-sip2\",\n      \"version\": \"3.1.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-sip2-3.1.1\"\n    },\n    {\n      \"id\": \"edge-ncip-1.9.2\",\n      \"name\": \"edge-ncip\",\n      \"version\": \"1.9.2\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-ncip-1.9.2\"\n    },\n    {\n      \"id\": \"edge-fqm-1.0.1\",\n      \"name\": \"edge-fqm\",\n      \"version\": \"1.0.1\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-fqm-1.0.1\"\n    },\n    {\n      \"id\": \"edge-patron-5.0.0\",\n      \"name\": \"edge-patron\",\n      \"version\": \"5.0.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-patron-5.0.0\"\n    },\n    {\n      \"id\": \"edge-courses-1.3.0\",\n      \"name\": \"edge-courses\",\n      \"version\": \"1.3.0\",\n      \"url\": \"https://mdr-folio-eis-us-east-1-dev.s3.amazonaws.com/edge-courses-1.3.0\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/modules/discovery?limit=500",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "modules",
+            "discovery"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DCB get item",
+      "id": "777b24cf-f303-4eb6-a6c7-4dd8dfc2cbb9",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"item\": {\n        \"id\": \"c3219bf2-a4fa-466a-a5a0-56bbf2c53b83\",\n        \"barcode\": \"66299694\"\n    },\n    \"patron\": {\n        \"id\": \"24269bf6-1eae-421f-8e18-31cb46480ad9\",\n        \"group\": \"Staff\",\n        \"barcode\": \"dcb_test1\"\n    },\n    \"pickup\": {\n        \"servicePointName\": \"test1\",\n        \"libraryCode\": \"test\"\n    },\n    \"role\": \"LENDER\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://edge-eureka-bugfest-ramsons.int.aws.folio.org/dcbService/transactions/52eb7e9e-7a18-4c25-b8a2-f1f1c1973716?apiKey=eyJzIjoiVDNUSzAzR2QyViIsInQiOiJmczA5MDAwMDAwIiwidSI6ImZzMDkwMDAwMDAifQ%3D%3D",
+          "protocol": "https",
+          "host": [
+            "edge-eureka-bugfest-ramsons",
+            "int",
+            "aws",
+            "folio",
+            "org"
+          ],
+          "path": [
+            "dcbService",
+            "transactions",
+            "52eb7e9e-7a18-4c25-b8a2-f1f1c1973716"
+          ],
+          "query": [
+            {
+              "key": "apiKey",
+              "value": "eyJzIjoiVDNUSzAzR2QyViIsInQiOiJmczA5MDAwMDAwIiwidSI6ImZzMDkwMDAwMDAifQ%3D%3D"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl --location 'https://edge-eureka-bugfest-ramsons.int.aws.folio.org/dcbService/transactions/52eb7e9e-7a18-4c25-b8a2-f1f1c1973716?apiKey=eyJzIjoiVDNUSzAzR2QyViIsInQiOiJmczA5MDAwMDAwIiwidSI6ImZzMDkwMDAwMDAifQ%3D%3D' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"item\": {\n        \"id\": \"c3219bf2-a4fa-466a-a5a0-56bbf2c53b83\",\n        \"barcode\": \"66299694\"\n    },\n    \"patron\": {\n        \"id\": \"24269bf6-1eae-421f-8e18-31cb46480ad9\",\n        \"group\": \"Staff\",\n        \"barcode\": \"dcb_test1\"\n    },\n    \"pickup\": {\n        \"servicePointName\": \"test1\",\n        \"libraryCode\": \"test\"\n    },\n    \"role\": \"LENDER\"\n}'"
+      },
+      "response": []
+    },
+    {
+      "name": "edge orders",
+      "id": "b3d165eb-a90b-4098-b0de-ca0bd2a48be9",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://edge-{{tenant_prefix}}.{{domain}}/orders?type=MOSAIC&apikey=eyJzIjoic2RaQkhKRGRHbyIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9",
+          "protocol": "https",
+          "host": [
+            "edge-{{tenant_prefix}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "orders"
+          ],
+          "query": [
+            {
+              "key": "type",
+              "value": "MOSAIC"
+            },
+            {
+              "key": "apikey",
+              "value": "eyJzIjoic2RaQkhKRGRHbyIsInQiOiJmczA5MDAwMDAwIiwidSI6IkVCU0NPRWRnZSJ9"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl --location 'https://edge-eureka-bugfest-ramsons.int.aws.folio.org/dcbService/transactions/52eb7e9e-7a18-4c25-b8a2-f1f1c1973716?apiKey=eyJzIjoiVDNUSzAzR2QyViIsInQiOiJmczA5MDAwMDAwIiwidSI6ImZzMDkwMDAwMDAifQ%3D%3D' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"item\": {\n        \"id\": \"c3219bf2-a4fa-466a-a5a0-56bbf2c53b83\",\n        \"barcode\": \"66299694\"\n    },\n    \"patron\": {\n        \"id\": \"24269bf6-1eae-421f-8e18-31cb46480ad9\",\n        \"group\": \"Staff\",\n        \"barcode\": \"dcb_test1\"\n    },\n    \"pickup\": {\n        \"servicePointName\": \"test1\",\n        \"libraryCode\": \"test\"\n    },\n    \"role\": \"LENDER\"\n}'"
+      },
+      "response": []
+    },
+    {
+      "name": "Get authorities",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "b5d1da31-7b58-4311-8d9e-fe90ffc2ae3a",
+            "exec": [
+              "var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/authn/login-with-expiry`;\r",
+              "\r",
+              "const raw = JSON.stringify({\r",
+              "  \"username\": pm.environment.get('tenant_username'),\r",
+              "  \"password\": pm.environment.get('tenant_password')\r",
+              "});\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: kongUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/json',\r",
+              "        'x-okapi-tenant': `${pm.environment.get('realm')}`\r",
+              "    },\r",
+              "    body: raw\r",
+              "}, (err, res) => console.log(res)); //=> pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "770656e3-e03d-46be-a353-8d2b8f2f9875",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tokne",
+            "value": "{{okapi-token}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authority-storage/authorities?deleted=true&limit=2000&query=id==81657059-ff4f-42da-a3c9-f02377959740",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authority-storage",
+            "authorities"
+          ],
+          "query": [
+            {
+              "key": "deleted",
+              "value": "true"
+            },
+            {
+              "key": "limit",
+              "value": "2000"
+            },
+            {
+              "key": "query",
+              "value": "id==81657059-ff4f-42da-a3c9-f02377959740"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get authorities",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "b5d1da31-7b58-4311-8d9e-fe90ffc2ae3a",
+            "exec": [
+              "var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/authn/login-with-expiry`;\r",
+              "\r",
+              "const raw = JSON.stringify({\r",
+              "  \"username\": pm.environment.get('tenant_username'),\r",
+              "  \"password\": pm.environment.get('tenant_password')\r",
+              "});\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: kongUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/json',\r",
+              "        'x-okapi-tenant': `${pm.environment.get('realm')}`\r",
+              "    },\r",
+              "    body: raw\r",
+              "}, (err, res) => console.log(res)); //=> pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "7cbd013f-313c-4ed6-b334-df96cfaaa9e1",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tokne",
+            "value": "{{okapi-token}}",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/authority-storage/authorities?deleted=true&limit=2000&query=id==81657059-ff4f-42da-a3c9-f02377959740",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "authority-storage",
+            "authorities"
+          ],
+          "query": [
+            {
+              "key": "deleted",
+              "value": "true"
+            },
+            {
+              "key": "limit",
+              "value": "2000"
+            },
+            {
+              "key": "query",
+              "value": "id==81657059-ff4f-42da-a3c9-f02377959740"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "inventory-reindex-records",
+      "id": "b7d034b7-6e7c-46a2-b7a4-2cdfdd7248f0",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/tenants?limit=100",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "tenants"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "id": "7c90fc9c-932e-4600-92ce-776e17639552",
+      "key": "adminToken",
+      "value": ""
+    },
+    {
+      "id": "6a851274-c545-4af7-8d78-fd938f9d4e32",
+      "key": "keycloakAdminToken",
+      "value": ""
+    }
+  ]
+}

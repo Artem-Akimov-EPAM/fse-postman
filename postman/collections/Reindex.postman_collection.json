@@ -1,0 +1,327 @@
+{
+  "info": {
+    "_postman_id": "573d8dbd-d4ac-4eab-a116-fddf816d9433",
+    "name": "Reindex",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "RE-merge instance with status failed",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "7080b648-e53f-4dd0-9cbe-c41613628051",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/search/index/instance-records/reindex/merge/failed",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "search",
+            "index",
+            "instance-records",
+            "reindex",
+            "merge",
+            "failed"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "70525f61-8a5b-479a-8b1a-f6090feb66b8",
+          "name": "success rebf cs00000",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/search/index/instance-records/reindex/status",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "search",
+                "index",
+                "instance-records",
+                "reindex",
+                "status"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 10 Jan 2025 21:41:04 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Server",
+              "value": "nginx/1.26.2"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Kong-Upstream-Latency",
+              "value": "28"
+            },
+            {
+              "key": "X-Kong-Proxy-Latency",
+              "value": "0"
+            },
+            {
+              "key": "Via",
+              "value": "kong/3.7.1"
+            },
+            {
+              "key": "X-Kong-Request-Id",
+              "value": "eb7ea610c64cb64417ca5b0fd8726b53"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"entityType\": \"CONTRIBUTOR\",\n        \"status\": \"UPLOAD_COMPLETED\",\n        \"totalMergeRanges\": 0,\n        \"processedMergeRanges\": 0,\n        \"totalUploadRanges\": 4096,\n        \"processedUploadRanges\": 4096,\n        \"startTimeUpload\": \"2025-01-10T21:13:55.429Z\",\n        \"endTimeUpload\": \"2025-01-10T21:27:36.030Z\"\n    },\n    {\n        \"entityType\": \"HOLDINGS\",\n        \"status\": \"MERGE_COMPLETED\",\n        \"totalMergeRanges\": 4883,\n        \"processedMergeRanges\": 4883,\n        \"totalUploadRanges\": 0,\n        \"processedUploadRanges\": 0,\n        \"startTimeMerge\": \"2025-01-10T20:37:45.557Z\",\n        \"endTimeMerge\": \"2025-01-10T21:13:53.693Z\"\n    },\n    {\n        \"entityType\": \"CLASSIFICATION\",\n        \"status\": \"UPLOAD_COMPLETED\",\n        \"totalMergeRanges\": 0,\n        \"processedMergeRanges\": 0,\n        \"totalUploadRanges\": 4096,\n        \"processedUploadRanges\": 4096,\n        \"startTimeUpload\": \"2025-01-10T21:13:56.404Z\",\n        \"endTimeUpload\": \"2025-01-10T21:35:59.082Z\"\n    },\n    {\n        \"entityType\": \"SUBJECT\",\n        \"status\": \"UPLOAD_COMPLETED\",\n        \"totalMergeRanges\": 0,\n        \"processedMergeRanges\": 0,\n        \"totalUploadRanges\": 4096,\n        \"processedUploadRanges\": 4096,\n        \"startTimeUpload\": \"2025-01-10T21:13:54.367Z\",\n        \"endTimeUpload\": \"2025-01-10T21:27:21.206Z\"\n    },\n    {\n        \"entityType\": \"ITEM\",\n        \"status\": \"MERGE_COMPLETED\",\n        \"totalMergeRanges\": 10490,\n        \"processedMergeRanges\": 10490,\n        \"totalUploadRanges\": 0,\n        \"processedUploadRanges\": 0,\n        \"startTimeMerge\": \"2025-01-10T20:37:45.537Z\",\n        \"endTimeMerge\": \"2025-01-10T21:13:07.172Z\"\n    },\n    {\n        \"entityType\": \"INSTANCE\",\n        \"status\": \"UPLOAD_COMPLETED\",\n        \"totalMergeRanges\": 0,\n        \"processedMergeRanges\": 0,\n        \"totalUploadRanges\": 1669,\n        \"processedUploadRanges\": 1669,\n        \"startTimeUpload\": \"2025-01-10T21:13:56.378Z\",\n        \"endTimeUpload\": \"2025-01-10T21:35:49.498Z\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "RE-upload instance",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "7d554b35-5619-4bf6-8cb5-7d3ee5aa1a8f",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "9b230bf1-9ef8-4e26-a112-b376100ca9b9",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{  \"indexSettings\": {},  \"entityTypes\": [\"instance\",\"subject\",\"contributor\",\"classification\",\"call-number\"] }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/search/index/instance-records/reindex/upload",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "search",
+            "index",
+            "instance-records",
+            "reindex",
+            "upload"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "5602a507-ffb0-4a9b-b6d6-487d59b59bfe",
+          "name": "success rebf cs00000",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "type": "text"
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/search/index/instance-records/reindex/status",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "search",
+                "index",
+                "instance-records",
+                "reindex",
+                "status"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Fri, 10 Jan 2025 21:41:04 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Server",
+              "value": "nginx/1.26.2"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Kong-Upstream-Latency",
+              "value": "28"
+            },
+            {
+              "key": "X-Kong-Proxy-Latency",
+              "value": "0"
+            },
+            {
+              "key": "Via",
+              "value": "kong/3.7.1"
+            },
+            {
+              "key": "X-Kong-Request-Id",
+              "value": "eb7ea610c64cb64417ca5b0fd8726b53"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"entityType\": \"CONTRIBUTOR\",\n        \"status\": \"UPLOAD_COMPLETED\",\n        \"totalMergeRanges\": 0,\n        \"processedMergeRanges\": 0,\n        \"totalUploadRanges\": 4096,\n        \"processedUploadRanges\": 4096,\n        \"startTimeUpload\": \"2025-01-10T21:13:55.429Z\",\n        \"endTimeUpload\": \"2025-01-10T21:27:36.030Z\"\n    },\n    {\n        \"entityType\": \"HOLDINGS\",\n        \"status\": \"MERGE_COMPLETED\",\n        \"totalMergeRanges\": 4883,\n        \"processedMergeRanges\": 4883,\n        \"totalUploadRanges\": 0,\n        \"processedUploadRanges\": 0,\n        \"startTimeMerge\": \"2025-01-10T20:37:45.557Z\",\n        \"endTimeMerge\": \"2025-01-10T21:13:53.693Z\"\n    },\n    {\n        \"entityType\": \"CLASSIFICATION\",\n        \"status\": \"UPLOAD_COMPLETED\",\n        \"totalMergeRanges\": 0,\n        \"processedMergeRanges\": 0,\n        \"totalUploadRanges\": 4096,\n        \"processedUploadRanges\": 4096,\n        \"startTimeUpload\": \"2025-01-10T21:13:56.404Z\",\n        \"endTimeUpload\": \"2025-01-10T21:35:59.082Z\"\n    },\n    {\n        \"entityType\": \"SUBJECT\",\n        \"status\": \"UPLOAD_COMPLETED\",\n        \"totalMergeRanges\": 0,\n        \"processedMergeRanges\": 0,\n        \"totalUploadRanges\": 4096,\n        \"processedUploadRanges\": 4096,\n        \"startTimeUpload\": \"2025-01-10T21:13:54.367Z\",\n        \"endTimeUpload\": \"2025-01-10T21:27:21.206Z\"\n    },\n    {\n        \"entityType\": \"ITEM\",\n        \"status\": \"MERGE_COMPLETED\",\n        \"totalMergeRanges\": 10490,\n        \"processedMergeRanges\": 10490,\n        \"totalUploadRanges\": 0,\n        \"processedUploadRanges\": 0,\n        \"startTimeMerge\": \"2025-01-10T20:37:45.537Z\",\n        \"endTimeMerge\": \"2025-01-10T21:13:07.172Z\"\n    },\n    {\n        \"entityType\": \"INSTANCE\",\n        \"status\": \"UPLOAD_COMPLETED\",\n        \"totalMergeRanges\": 0,\n        \"processedMergeRanges\": 0,\n        \"totalUploadRanges\": 1669,\n        \"processedUploadRanges\": 1669,\n        \"startTimeUpload\": \"2025-01-10T21:13:56.378Z\",\n        \"endTimeUpload\": \"2025-01-10T21:35:49.498Z\"\n    }\n]"
+        }
+      ]
+    }
+  ]
+}

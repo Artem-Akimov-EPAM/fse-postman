@@ -1,0 +1,273 @@
+{
+  "info": {
+    "_postman_id": "d96cfb0f-1ead-4fb6-9c7b-bcf024d38e90",
+    "name": "SASHKO",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get token",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "50db38fb-360f-4427-8b7f-86a05ecc6d7a",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "8c8d05d2-0a62-4609-aefe-30596128b510",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"POBb2OVhoGKChAahmcaCnknl\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/authn/login-with-expiry",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "authn",
+            "login-with-expiry"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check enable status",
+      "id": "85ed0b2d-fea8-429e-8dfa-22540e03099c",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfaWQiOiIyNzUxMGZiMC05OGRkLTRhYjUtYjY4Mi0yMGY3OGU5ZTY2NWMiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0NDkwMTYwLCJpYXQiOjE3NDQ0ODk1NjAsInRlbmFudCI6InN1cGVydGVuYW50In0.f-7FXBjhlxkPUK-hsqowJS3iCOSDAGCQKioUVrfhEG0",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/_/proxy/tenants/fs00001257/install",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001257",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "true",
+              "disabled": true
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "false",
+              "disabled": true
+            },
+            {
+              "key": "tenantParameters",
+              "value": "loadReference%3Dfalse%2CloadSample%3Dfalse",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ENABLE modules",
+      "id": "d2a8455e-15e8-4cc1-8ec3-1a05f0dd3285",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfaWQiOiIyNzUxMGZiMC05OGRkLTRhYjUtYjY4Mi0yMGY3OGU5ZTY2NWMiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0NDkwMTEyLCJpYXQiOjE3NDQ0ODk1MTIsInRlbmFudCI6InN1cGVydGVuYW50In0.ObXgy0qPSWN-K0XicFBHVXZV5P76J5gHLdmj0X1eMKE",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n    {\n        \"id\": \"mod-service-interaction-4.1.3\",\n        \"action\": \"enable\"\n    }\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/_/proxy/tenants/fs00001257/install?async=false&ignoreErrors=false&tenantParameters=loadReference%3Dfalse%2CloadSample%3Dfalse",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001257",
+            "install"
+          ],
+          "query": [
+            {
+              "key": "async",
+              "value": "false"
+            },
+            {
+              "key": "ignoreErrors",
+              "value": "false"
+            },
+            {
+              "key": "tenantParameters",
+              "value": "loadReference%3Dfalse%2CloadSample%3Dfalse"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "modules",
+      "id": "2361d655-a895-4719-9d1e-117a34397a69",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfaWQiOiIyNzUxMGZiMC05OGRkLTRhYjUtYjY4Mi0yMGY3OGU5ZTY2NWMiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0NDY0NTI2LCJpYXQiOjE3NDQ0NjM5MjYsInRlbmFudCI6InN1cGVydGVuYW50In0.zI-EP2bLPzWdTAP8S2HVJ18DoQXYJafJYtQEy9OB3C4",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/_/proxy/tenants/fs00001257/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001257",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get Groups",
+      "id": "57764005-1e04-4097-be55-861b970a417d",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-tenant",
+            "value": "fs00001257",
+            "type": "text"
+          },
+          {
+            "key": "x-okapi-token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfaWQiOiIyNzUxMGZiMC05OGRkLTRhYjUtYjY4Mi0yMGY3OGU5ZTY2NWMiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0NDY0NTI2LCJpYXQiOjE3NDQ0NjM5MjYsInRlbmFudCI6InN1cGVydGVuYW50In0.zI-EP2bLPzWdTAP8S2HVJ18DoQXYJafJYtQEy9OB3C4",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://okapi-rsb-eu-central-1.folio.ebsco.com/_/proxy/tenants/fs00001257/modules",
+          "protocol": "https",
+          "host": [
+            "okapi-rsb-eu-central-1",
+            "folio",
+            "ebsco",
+            "com"
+          ],
+          "path": [
+            "_",
+            "proxy",
+            "tenants",
+            "fs00001257",
+            "modules"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,1305 @@
+{
+  "info": {
+    "_postman_id": "2058ba44-c5ba-4749-86db-30f48e1061d2",
+    "name": "Locate",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "tools",
+      "item": [
+        {
+          "name": "get token",
+          "id": "ee675dcb-5e60-48d4-ae08-337b6d059d0d",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{xokapitenant}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"EBSCOEdge\",\r\n    \"password\": \"40fjdO4X3GqiQgRuok5sRHwd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "okapi-{{folio}}-{{region}}.{{domain}}/authn/login",
+              "host": [
+                "okapi-{{folio}}-{{region}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "authn",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get token Copy",
+          "id": "812e4d99-5f11-4966-8f73-4b518e57f299",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{xokapitenant}}",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"EBSCOEdge\",\r\n    \"password\": \"40fjdO4X3GqiQgRuok5sRHwd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "okapi-{{folio}}-{{region}}.{{domain}}/authn/login",
+              "host": [
+                "okapi-{{folio}}-{{region}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "authn",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get tenants",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "41ac2191-784c-41bb-b339-c7bd72d20cbe",
+                "exec": [
+                  "var okapiUrl = `${pm.environment.get('okapi_url')}/authn/login`;\r",
+                  "var tenant = `${pm.environment.get('xokapitenant')}`;\r",
+                  "var user = `${pm.environment.get('admin_user')}`;\r",
+                  "var password = `${pm.environment.get('admin_password')}`;\r",
+                  "var jsonBody = {\r",
+                  "        \"username\": user,\r",
+                  "        \"password\": password\r",
+                  "    };\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: okapiUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'Content-Type': 'application/json',\r",
+                  "        'x-okapi-tenant': tenant\r",
+                  "    },\r",
+                  "    body: JSON.stringify(jsonBody)\r",
+                  "    \r",
+                  "}, (err, res) => pm.environment.set(\"xokapitoken\", res.json().okapiToken));\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "4ca70289-009f-43de-bceb-09fdb230c845",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{xokapitenant}}",
+                "type": "text"
+              },
+              {
+                "key": "x-okapi-token",
+                "value": "{{xokapitoken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{okapi_url}}/_/proxy/tenants/{{xokapitenant}}",
+              "host": [
+                "{{okapi_url}}"
+              ],
+              "path": [
+                "_",
+                "proxy",
+                "tenants",
+                "{{xokapitenant}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get guest-token",
+          "id": "9cf6950b-4f98-45bb-956d-b06719b3b65d",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{xokapitenant}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{okapi_url}}/opac-auth/guest-token",
+              "host": [
+                "{{okapi_url}}"
+              ],
+              "path": [
+                "opac-auth",
+                "guest-token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "070dce89-026a-4069-a0c4-2bd7cc97b4ea"
+    },
+    {
+      "name": "reindex Ramsons",
+      "item": [
+        {
+          "name": "reindex from inventory-storage to custom kafka topic",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "a1948dd7-d019-442a-8d19-d4ba13440c41",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'client_credentials'},\r",
+                  "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "ac6aada4-a36e-4b7b-9abb-44eea98f7e6e",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}"
+              },
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\n\t\"eventType\": \"REINDEX\",\n\n\t\"topicName\": \"inventory.locate-initial-load\"\n\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https:///kong-{{folio}}.{{domain}}/instance-storage/instances/iteration",
+              "protocol": "https",
+              "path": [
+                "kong-{{folio}}.{{domain}}",
+                "instance-storage",
+                "instances",
+                "iteration"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "8edfba6b-7b55-4b76-bd32-80ff515f7e81"
+    },
+    {
+      "name": "edge",
+      "item": [
+        {
+          "name": "edge user test",
+          "id": "ada5d1a3-3426-45d0-99a2-6d4db881f51f",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://edge-relc-central-tenant.int.aws.folio.org/inventory/inventory-view/instances?query=query=id==(44f379c9-1ade-5267-a46e-950988bd2964) AND (instance.discoverySuppress<>true OR (cql.allRecords = 1 NOT instance.discoverySuppress=\"\"))&apiKey={{edge_key}}",
+              "protocol": "https",
+              "host": [
+                "edge-relc-central-tenant",
+                "int",
+                "aws",
+                "folio",
+                "org"
+              ],
+              "path": [
+                "inventory",
+                "inventory-view",
+                "instances"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "query=id==(44f379c9-1ade-5267-a46e-950988bd2964) AND (instance.discoverySuppress<>true OR (cql.allRecords = 1 NOT instance.discoverySuppress=\"\"))"
+                },
+                {
+                  "key": "apiKey",
+                  "value": "eyJzIjoiRFNVNjZzMDFReSIsInQiOiJjczAwMDAwaW50IiwidSI6IkVCU0NPRWRnZSJ9",
+                  "disabled": true
+                },
+                {
+                  "key": "apiKey",
+                  "value": "{{edge_key}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edge user test Copy",
+          "id": "26b58ad6-f2a9-4069-9460-6fc71d84034f",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://edge-relc-central-tenant.int.aws.folio.org/inventory/inventory-view/instances?query=query=id==(44f379c9-1ade-5267-a46e-950988bd2964) AND (instance.discoverySuppress<>true OR (cql.allRecords = 1 NOT instance.discoverySuppress=\"\"))&apiKey={{edge_key}}",
+              "protocol": "https",
+              "host": [
+                "edge-relc-central-tenant",
+                "int",
+                "aws",
+                "folio",
+                "org"
+              ],
+              "path": [
+                "inventory",
+                "inventory-view",
+                "instances"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "query=id==(44f379c9-1ade-5267-a46e-950988bd2964) AND (instance.discoverySuppress<>true OR (cql.allRecords = 1 NOT instance.discoverySuppress=\"\"))"
+                },
+                {
+                  "key": "apiKey",
+                  "value": "eyJzIjoiRFNVNjZzMDFReSIsInQiOiJjczAwMDAwaW50IiwidSI6IkVCU0NPRWRnZSJ9",
+                  "disabled": true
+                },
+                {
+                  "key": "apiKey",
+                  "value": "{{edge_key}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edge user test Copy 2",
+          "id": "085092b9-85bd-43cd-b055-9d687b32fa69",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://edge-relc-central-tenant.int.aws.folio.org/inventory/inventory-view/instances?query=query=id==(44f379c9-1ade-5267-a46e-950988bd2964) AND (instance.discoverySuppress<>true OR (cql.allRecords = 1 NOT instance.discoverySuppress=\"\"))&apiKey={{edge_key}}",
+              "protocol": "https",
+              "host": [
+                "edge-relc-central-tenant",
+                "int",
+                "aws",
+                "folio",
+                "org"
+              ],
+              "path": [
+                "inventory",
+                "inventory-view",
+                "instances"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "query=id==(44f379c9-1ade-5267-a46e-950988bd2964) AND (instance.discoverySuppress<>true OR (cql.allRecords = 1 NOT instance.discoverySuppress=\"\"))"
+                },
+                {
+                  "key": "apiKey",
+                  "value": "eyJzIjoiRFNVNjZzMDFReSIsInQiOiJjczAwMDAwaW50IiwidSI6IkVCU0NPRWRnZSJ9",
+                  "disabled": true
+                },
+                {
+                  "key": "apiKey",
+                  "value": "{{edge_key}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "c1600588-ec4f-4f81-b67c-6109e745a350"
+    },
+    {
+      "name": "mod-opac-config",
+      "item": [
+        {
+          "name": "get configs",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'client_credentials'},\r",
+                  "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+                  "\r",
+                  "// // kong url\r",
+                  "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: kongUrl,\r",
+                  "//     method: 'GET',\r",
+                  "//     header: {\r",
+                  "//         'content-type': 'application/x-www-form-urlencoded'\r",
+                  "//     },\r",
+                  "//     body: {\r",
+                  "//         mode: 'none',\r",
+                  "//     }\r",
+                  "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "b25de49a-6afb-417d-b0e0-cd0c53beea00",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}"
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}"
+              }
+            ],
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/opac-configurations/entries",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "opac-configurations",
+                "entries"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get configs okpai",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "8488c894-b212-4e2d-be99-058f5fd589c6",
+                "exec": [
+                  "// var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: keycloakUrl,\r",
+                  "//     method: 'POST',\r",
+                  "//     header: {\r",
+                  "//         'content-type': 'application/x-www-form-urlencoded'\r",
+                  "//     },\r",
+                  "//     body: {\r",
+                  "//         mode: 'urlencoded',\r",
+                  "//         urlencoded: [\r",
+                  "//             {key: 'grant_type', value: 'client_credentials'},\r",
+                  "//             {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "//             {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "//         ]\r",
+                  "//     }\r",
+                  "// }, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+                  "\r",
+                  "// // kong url\r",
+                  "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: kongUrl,\r",
+                  "//     method: 'GET',\r",
+                  "//     header: {\r",
+                  "//         'content-type': 'application/x-www-form-urlencoded'\r",
+                  "//     },\r",
+                  "//     body: {\r",
+                  "//         mode: 'none',\r",
+                  "//     }\r",
+                  "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));\r",
+                  "\r",
+                  "\r",
+                  "// var okapiUrl = `https://okapi-${pm.environment.get('folio')}-${pm.environment.get('region')}.${pm.environment.get('domain')}/authn/login`;\r",
+                  "\r",
+                  "\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: okapiUrl,\r",
+                  "//     method: 'POST',\r",
+                  "//     headers: {\r",
+                  "//         'content-type': 'application/json',\r",
+                  "//         'x-okapi-tenant': \"${pm.environment.get('realm')}\"\r",
+                  "//     },\r",
+                  "//     body: {\r",
+                  "//     \"username\": \"${pm.environment.get('admin_user')}\",\r",
+                  "//     \"password\": \"${pm.environment.get('admin_password')}\"\r",
+                  "// }\r",
+                  "// }, (err, res) => pm.environment.set(\"okapi-token\", res.json().okapiToken));\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "// var okapiUrl = `https://okapi-${pm.environment.get('folio')}-${pm.environment.get('region')}.${pm.environment.get('domain')}/authn/login`;\r",
+                  "\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: okapiUrl,\r",
+                  "//     method: 'POST',\r",
+                  "//     headers: {\r",
+                  "//         'content-type': 'application/json',\r",
+                  "//         'x-okapi-tenant': pm.environment.get('realm') // Correctly retrieve the environment variable\r",
+                  "//     },\r",
+                  "//     body: JSON.stringify({ // Ensure the request body is serialized as a JSON string\r",
+                  "//         username: pm.environment.get('admin_user'), // Use pm.environment.get() for variables\r",
+                  "//         password: pm.environment.get('admin_password') // Same for password\r",
+                  "//     })\r",
+                  "// }, (err, res) => {\r",
+                  "//     if (err) {\r",
+                  "//         console.error(\"Error in auth request:\", err);\r",
+                  "//         return;\r",
+                  "//     }\r",
+                  "//     // Extract value from the response header 'x-okapi-token'\r",
+                  "//     var okapiToken = res.headers.get('x-okapi-token'); // Get the header value\r",
+                  "//     if (okapiToken) {\r",
+                  "//         pm.environment.set(\"okapi-token\", okapiToken); // Set the token in the environment variable\r",
+                  "//     } else {\r",
+                  "//         console.error(\"x-okapi-token header is missing from the response\");\r",
+                  "//     }\r",
+                  "// });\r",
+                  "\r",
+                  "// Build the authentication URL dynamically from environment variables\r",
+                  "// var okapiUrl = `https://okapi-${pm.environment.get('folio')}-${pm.environment.get('region')}.${pm.environment.get('domain')}/authn/login`;\r",
+                  "\r",
+                  "// const headers = {\r",
+                  "//     'x-okapi-tenant': pm.environment.get('realm'),\r",
+                  "//     'Content-Type': 'application/json'\r",
+                  "// };\r",
+                  "// // Log the request URL for debugging purposes\r",
+                  "// console.log('Auth Request URL:', okapiUrl);\r",
+                  "\r",
+                  "\r",
+                  "// // Send the POST request\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: okapiUrl,\r",
+                  "//     method: 'POST',\r",
+                  "//     headers:headers,\r",
+                  "//     body: JSON.stringify({\r",
+                  "//         username: pm.environment.get('admin_user'), // Extract 'username' from environment\r",
+                  "//         password: pm.environment.get('admin_password') // Extract 'password' from environment\r",
+                  "//     }),\r",
+                  "// }, (err, res) => {\r",
+                  "//     // Error handling for request\r",
+                  "//     if (err) {\r",
+                  "//         console.error(\"Error during the request:\", err);\r",
+                  "//         return;\r",
+                  "//     }\r",
+                  "\r",
+                  "//     // Log the headers from the response for debugging\r",
+                  "//     console.log('Response Headers:', res.headers);\r",
+                  "\r",
+                  "//     // Attempt to extract the 'x-okapi-token' value from the response headers\r",
+                  "//     var okapiToken = res.headers.get('x-okapi-token');\r",
+                  "//     if (okapiToken) {\r",
+                  "//         console.log('Extracted x-okapi-token:', okapiToken); // Log the token for debugging\r",
+                  "//         pm.environment.set('okapi-token', okapiToken); // Set the environment variable\r",
+                  "//     } else {\r",
+                  "//         console.error('No x-okapi-token header found in the response.');\r",
+                  "//     }\r",
+                  "// });"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "7e97d1ec-d81d-415c-b912-64fd0af95761",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "disabled": true
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}"
+              },
+              {
+                "key": "x-okapi-token",
+                "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFQlNDT0FkbWluIiwidHlwZSI6ImxlZ2FjeS1hY2Nlc3MiLCJ1c2VyX2lkIjoiMWViMmUwMTYtYmE5YS00ZjdjLTk1NWYtZGFhMDNlMDE1NzcxIiwiaWF0IjoxNzQ4OTUxMzk4LCJ0ZW5hbnQiOiJjc2x0MDAwaW50In0.dZWKfk0g5AOrNh9elzXV_-Xbdw7j0cjyxr1MKJFqm5Q",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://okapi-{{folio}}-{{region}}.{{domain}}/opac-configurations/entries?limit=300",
+              "protocol": "https",
+              "host": [
+                "okapi-{{folio}}-{{region}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "opac-configurations",
+                "entries"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "300"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update config by id",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+                "exec": [
+                  "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "pm.sendRequest({\r",
+                  "    url: keycloakUrl,\r",
+                  "    method: 'POST',\r",
+                  "    header: {\r",
+                  "        'content-type': 'application/x-www-form-urlencoded'\r",
+                  "    },\r",
+                  "    body: {\r",
+                  "        mode: 'urlencoded',\r",
+                  "        urlencoded: [\r",
+                  "            {key: 'grant_type', value: 'client_credentials'},\r",
+                  "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "        ]\r",
+                  "    }\r",
+                  "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+                  "\r",
+                  "// // kong url\r",
+                  "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: kongUrl,\r",
+                  "//     method: 'GET',\r",
+                  "//     header: {\r",
+                  "//         'content-type': 'application/x-www-form-urlencoded'\r",
+                  "//     },\r",
+                  "//     body: {\r",
+                  "//         mode: 'none',\r",
+                  "//     }\r",
+                  "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "ba27a4fe-d0ea-4740-b23f-74d7dcabb3e7",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}"
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"b411e3ef-fb90-4fc9-9ab5-be190c7aa675\",\r\n    \"module\": \"OPAC_RTAC\",\r\n    \"configName\": \"edge_rtac_url\",\r\n    \"code\": \"EDGE_RTAC_URL\",\r\n    \"enabled\": true,\r\n    \"value\": \"https://edge-relctls2-central-tenant.int.aws.folio.org\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://kong-{{folio}}.{{domain}}/opac-configurations/entries/:id",
+              "protocol": "https",
+              "host": [
+                "kong-{{folio}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "opac-configurations",
+                "entries",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "b411e3ef-fb90-4fc9-9ab5-be190c7aa675"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update config by id okapi",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+                "exec": [
+                  "// var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+                  "\r",
+                  "\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: keycloakUrl,\r",
+                  "//     method: 'POST',\r",
+                  "//     header: {\r",
+                  "//         'content-type': 'application/x-www-form-urlencoded'\r",
+                  "//     },\r",
+                  "//     body: {\r",
+                  "//         mode: 'urlencoded',\r",
+                  "//         urlencoded: [\r",
+                  "//             {key: 'grant_type', value: 'client_credentials'},\r",
+                  "//             {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+                  "//             {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+                  "//         ]\r",
+                  "//     }\r",
+                  "// }, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+                  "\r",
+                  "// // kong url\r",
+                  "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+                  "// pm.sendRequest({\r",
+                  "//     url: kongUrl,\r",
+                  "//     method: 'GET',\r",
+                  "//     header: {\r",
+                  "//         'content-type': 'application/x-www-form-urlencoded'\r",
+                  "//     },\r",
+                  "//     body: {\r",
+                  "//         mode: 'none',\r",
+                  "//     }\r",
+                  "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "f3c39ded-0d91-407f-a800-ff171f5094fa",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-okapi-token",
+                "value": "{{okapi-token}}",
+                "disabled": true
+              },
+              {
+                "key": "x-okapi-tenant",
+                "value": "{{realm}}"
+              },
+              {
+                "key": "x-okapi-token",
+                "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFQlNDT0FkbWluIiwidHlwZSI6ImxlZ2FjeS1hY2Nlc3MiLCJ1c2VyX2lkIjoiMWViMmUwMTYtYmE5YS00ZjdjLTk1NWYtZGFhMDNlMDE1NzcxIiwiaWF0IjoxNzQ4OTUxMzk4LCJ0ZW5hbnQiOiJjc2x0MDAwaW50In0.dZWKfk0g5AOrNh9elzXV_-Xbdw7j0cjyxr1MKJFqm5Q",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n            \"id\": \"38253f98-7a8a-4bae-b978-5d24f446ad06\",\r\n            \"module\": \"OPAC_PATRON\",\r\n            \"configName\": \"edge_patron_url\",\r\n            \"code\": \"EDGE_PATRON_URL\",\r\n            \"enabled\": true,\r\n            \"value\": \"https://edge-relctls2-central-tenant.int.aws.folio.org\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://okapi-{{folio}}-{{region}}.{{domain}}/opac-configurations/entries/:id",
+              "protocol": "https",
+              "host": [
+                "okapi-{{folio}}-{{region}}",
+                "{{domain}}"
+              ],
+              "path": [
+                "opac-configurations",
+                "entries",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "38253f98-7a8a-4bae-b978-5d24f446ad06"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "4be0a00e-0fa5-4bab-b67e-83b146a6a9c6"
+    },
+    {
+      "name": "get material-types",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+              "\r",
+              "// // kong url\r",
+              "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+              "// pm.sendRequest({\r",
+              "//     url: kongUrl,\r",
+              "//     method: 'GET',\r",
+              "//     header: {\r",
+              "//         'content-type': 'application/x-www-form-urlencoded'\r",
+              "//     },\r",
+              "//     body: {\r",
+              "//         mode: 'none',\r",
+              "//     }\r",
+              "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "f8a54425-1750-4b7d-ba9a-2a65c00a61bc",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/material-types?limit=100",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "material-types"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get instance-formats",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+              "\r",
+              "// // kong url\r",
+              "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+              "// pm.sendRequest({\r",
+              "//     url: kongUrl,\r",
+              "//     method: 'GET',\r",
+              "//     header: {\r",
+              "//         'content-type': 'application/x-www-form-urlencoded'\r",
+              "//     },\r",
+              "//     body: {\r",
+              "//         mode: 'none',\r",
+              "//     }\r",
+              "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "90dbb7f5-5ca0-4054-ae9a-f44320061f53",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/instance-formats?limit=100",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "instance-formats"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get cancellation reasons",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+              "\r",
+              "// // kong url\r",
+              "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+              "// pm.sendRequest({\r",
+              "//     url: kongUrl,\r",
+              "//     method: 'GET',\r",
+              "//     header: {\r",
+              "//         'content-type': 'application/x-www-form-urlencoded'\r",
+              "//     },\r",
+              "//     body: {\r",
+              "//         mode: 'none',\r",
+              "//     }\r",
+              "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "a9e60d26-90da-4779-981e-852222d97b65",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/cancellation-reason-storage/cancellation-reasons?limit=100",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "cancellation-reason-storage",
+            "cancellation-reasons"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get identifier-types",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+              "\r",
+              "// // kong url\r",
+              "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+              "// pm.sendRequest({\r",
+              "//     url: kongUrl,\r",
+              "//     method: 'GET',\r",
+              "//     header: {\r",
+              "//         'content-type': 'application/x-www-form-urlencoded'\r",
+              "//     },\r",
+              "//     body: {\r",
+              "//         mode: 'none',\r",
+              "//     }\r",
+              "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "a1050080-6c78-4b7a-ab19-20683371e8e7",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/identifier-types?limit=100",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "identifier-types"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get locations",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+              "\r",
+              "// // kong url\r",
+              "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+              "// pm.sendRequest({\r",
+              "//     url: kongUrl,\r",
+              "//     method: 'GET',\r",
+              "//     header: {\r",
+              "//         'content-type': 'application/x-www-form-urlencoded'\r",
+              "//     },\r",
+              "//     body: {\r",
+              "//         mode: 'none',\r",
+              "//     }\r",
+              "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "d7345c6b-3ad8-46e0-a4dc-f761b23a1412",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/locations?limit=100",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "locations"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get instance-note-types",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "0afb5eee-af07-40b7-a522-5a909748754d",
+            "exec": [
+              "var keycloakUrl = `https://keycloak-${pm.environment.get('folio')}.${pm.environment.get('domain')}/realms/${pm.environment.get('realm')}/protocol/openid-connect/token`;\r",
+              "\r",
+              "\r",
+              "pm.sendRequest({\r",
+              "    url: keycloakUrl,\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'content-type': 'application/x-www-form-urlencoded'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'urlencoded',\r",
+              "        urlencoded: [\r",
+              "            {key: 'grant_type', value: 'client_credentials'},\r",
+              "            {key: 'client_id', value: pm.environment.get('tenant_client')},\r",
+              "            {key: 'client_secret', value: pm.environment.get('tenant_client_secret')}\r",
+              "        ]\r",
+              "    }\r",
+              "}, (err, res) => pm.environment.set(\"okapi-token\", res.json().access_token));\r",
+              "\r",
+              "// // kong url\r",
+              "// var kongUrl = `https://kong-${pm.environment.get('folio')}.${pm.environment.get('domain')}/tenants?query=name=${pm.environment.get('realm')}`;\r",
+              "// pm.sendRequest({\r",
+              "//     url: kongUrl,\r",
+              "//     method: 'GET',\r",
+              "//     header: {\r",
+              "//         'content-type': 'application/x-www-form-urlencoded'\r",
+              "//     },\r",
+              "//     body: {\r",
+              "//         mode: 'none',\r",
+              "//     }\r",
+              "// }, (err, res) => pm.environment.set(\"tenant_id\", res.json().tenants[0].id));"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "id": "a60dc658-6eda-49e0-8f84-2371ed75bf69",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-okapi-token",
+            "value": "{{okapi-token}}"
+          },
+          {
+            "key": "x-okapi-tenant",
+            "value": "{{realm}}"
+          }
+        ],
+        "url": {
+          "raw": "https://kong-{{folio}}.{{domain}}/instance-note-types?limit=100",
+          "protocol": "https",
+          "host": [
+            "kong-{{folio}}",
+            "{{domain}}"
+          ],
+          "path": [
+            "instance-note-types"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
