@@ -3512,12 +3512,12 @@
   ],
   "variable": [
     {
-      "id": "7c90fc9c-932e-4600-92ce-776e17639552",
+      "id": "041600ae-9417-474d-89ef-5c52bcb2dfb1",
       "key": "adminToken",
       "value": ""
     },
     {
-      "id": "6a851274-c545-4af7-8d78-fd938f9d4e32",
+      "id": "9fedf63e-1455-4640-83c5-d0826d0d8459",
       "key": "keycloakAdminToken",
       "value": ""
     }
