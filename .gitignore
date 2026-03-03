@@ -1,0 +1,44 @@
+# Environment files (may contain secrets/tokens)
+*.postman_environment.json
+
+# Postman global variables (may contain secrets)
+*.postman_globals.json
+
+# Postman backup files
+*.postman_dump.json
+
+# Secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+*.jks
+
+# API keys and tokens
+secrets.json
+credentials.json
+auth.json
+tokens.json
+
+# Node modules (if using Newman or other tools)
+node_modules/
+
+# Newman reports
+newman/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
